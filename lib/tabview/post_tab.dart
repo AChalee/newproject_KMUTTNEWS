@@ -463,10 +463,24 @@ class _AddDataState extends State<AddData> {
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   children: <Widget>[
-                    TextField(
-                      decoration: InputDecoration(labelText: "tilte"),
+                    TextFormField(
                       controller: newsTitle,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                          hintText: 'หัวข้อข่าวสาร/กิจกรรม',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 32.0)),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                              borderRadius: BorderRadius.circular(5.0))),
                     ),
+                    // TextField(
+                    //   decoration: InputDecoration(labelText: "tilte"),
+                    //   controller: newsTitle,
+                    // ),
                     Padding(padding: const EdgeInsets.all(10)),
                     TextField(
                       decoration: InputDecoration(labelText: "content"),
