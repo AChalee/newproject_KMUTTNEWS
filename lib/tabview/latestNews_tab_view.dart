@@ -1,3 +1,4 @@
+import 'package:New_Project_KMUTTNEWS/tabview/read.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 //import 'package:firebase_core/firebase_core.dart';
@@ -51,7 +52,18 @@ class _LatestNewsTabViewState extends State<LatestNewsTabView> {
                       child: Card(
                         child: Container(
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Read(
+                                          newsTitle: snapshot
+                                              .data.documents[index].documentID,
+                                          newsContent: snapshot
+                                              .data
+                                              .documents[index]
+                                              .data["content"])));
+                            },
                             child: Column(
                               children: [
                                 ListTile(

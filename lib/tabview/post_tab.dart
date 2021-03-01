@@ -463,6 +463,8 @@ class _AddDataState extends State<AddData> {
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   children: <Widget>[
+                    Padding(padding: const EdgeInsets.all(10)),
+
                     TextFormField(
                       controller: newsTitle,
                       keyboardType: TextInputType.text,
@@ -483,9 +485,28 @@ class _AddDataState extends State<AddData> {
                     // ),
                     Padding(padding: const EdgeInsets.all(10)),
                     TextField(
-                      decoration: InputDecoration(labelText: "content"),
                       controller: newsContent,
+                      maxLines: 7,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                          hintText: 'รายละเอียด',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                              width: 32.0,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.grey, width: 1.0),
+                              borderRadius: BorderRadius.circular(5.0))),
                     ),
+
+                    // TextField(
+                    //   decoration: InputDecoration(labelText: "content"),
+                    //   controller: newsContent,
+                    // ),
                     Padding(padding: const EdgeInsets.all(10)),
                     RaisedButton(
                         child: Text("Post"),

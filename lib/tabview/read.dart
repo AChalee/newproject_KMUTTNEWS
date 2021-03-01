@@ -23,13 +23,36 @@ class _ReadState extends State<Read> {
         .get()
         .then((value) {
       setState(() {
-        newsContent = value.data()["content"];
+        // newsContent = value.data()["content"];
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.newsTitle),
+        backgroundColor: Colors.orange,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              widget.newsTitle,
+              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+            ),
+            Text(
+              newsContent,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
