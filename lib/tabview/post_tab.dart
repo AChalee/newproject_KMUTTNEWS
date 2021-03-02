@@ -434,6 +434,8 @@
 // }
 // //}
 
+import 'dart:html';
+
 import 'package:New_Project_KMUTTNEWS/component/show_notification.dart';
 import 'package:New_Project_KMUTTNEWS/service/add_data_service.dart';
 import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
@@ -447,6 +449,19 @@ class AddData extends StatefulWidget {
 class _AddDataState extends State<AddData> {
   final newsTitle = TextEditingController();
   final newsContent = TextEditingController();
+
+  updateUser(User user) async {
+    await collection
+        .document(user.reference.documentID)
+        .updateData(user.toString());
+  }
+
+  String category;
+  @override
+  void initState() {
+    category = widget.user.category;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -464,7 +479,6 @@ class _AddDataState extends State<AddData> {
                 child: Column(
                   children: <Widget>[
                     Padding(padding: const EdgeInsets.all(10)),
-
                     TextFormField(
                       controller: newsTitle,
                       keyboardType: TextInputType.text,
@@ -479,10 +493,6 @@ class _AddDataState extends State<AddData> {
                                   BorderSide(color: Colors.grey, width: 1.0),
                               borderRadius: BorderRadius.circular(5.0))),
                     ),
-                    // TextField(
-                    //   decoration: InputDecoration(labelText: "tilte"),
-                    //   controller: newsTitle,
-                    // ),
                     Padding(padding: const EdgeInsets.all(10)),
                     TextField(
                       controller: newsContent,
@@ -502,11 +512,81 @@ class _AddDataState extends State<AddData> {
                                   BorderSide(color: Colors.grey, width: 1.0),
                               borderRadius: BorderRadius.circular(5.0))),
                     ),
-
-                    // TextField(
-                    //   decoration: InputDecoration(labelText: "content"),
-                    //   controller: newsContent,
+                    // Column(
+                    //   children: [
+                    //     Row(
+                    //       children: [
+                    //         SizedBox(
+                    //           width: 10,
+                    //           child: Radio(
+                    //             value: 'ข่าวสาร',
+                    //             groupValue: category,
+                    //             activeColor: Colors.orange,
+                    //             onChanged: (value) {
+                    //               setState(() {
+                    //                 category = value;
+                    //               });
+                    //             },
+                    //           ),
+                    //         ),
+                    //         SizedBox(
+                    //           width: 10.0,
+                    //         ),
+                    //         Text("ข่าวสาร")
+                    //       ],
+                    //     ),
+                    //   ],
                     // ),
+                    // Row(
+                    //   children: [
+                    //     SizedBox(
+                    //       width: 10,
+                    //       child: Radio(
+                    //           value: 'กิจกรรม',
+                    //           groupValue: category,
+                    //           activeColor: Colors.orange,
+                    //           onChanged: (value) {
+                    //             setState(() {
+                    //               category = value;
+                    //             });
+                    //           }),
+                    //     ),
+                    //     SizedBox(
+                    //       width: 10.0,
+                    //     ),
+                    //     Text("กิจกรรม"),
+                    //   ],
+                    // ),
+                    ListTile(
+                      title: Align(
+                        child: new Text("ข่าวสาร"),
+                        alignment: Alignment(-1.2, 0),
+                      ),
+                      leading: Radio(
+                        value: "ข่าวสาร",
+                        groupValue: widget.user.category,
+                        onChanged: (String value) {
+                          setState(() {
+                            widget.user.category = value;
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Align(
+                        child: new Text("กิจกรรม"),
+                        alignment: Alignment(-1.20, 0),
+                      ),
+                      leading: Radio(
+                        value: "กิจกรรม",
+                        groupValue: widget.user.category,
+                        onChanged: (String value) {
+                          setState(() {
+                            widget.user.category = value;
+                          });
+                        },
+                      ),
+                    ),
                     Padding(padding: const EdgeInsets.all(10)),
                     RaisedButton(
                         child: Text("Post"),

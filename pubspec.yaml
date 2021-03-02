@@ -38,6 +38,7 @@ dependencies:
    
   flutter_local_notifications: ^3.0.1+6
   logger: ^0.9.4
+  # firebase_picture_uploader: ^1.2.1
 
 
 

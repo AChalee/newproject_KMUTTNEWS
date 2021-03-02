@@ -1,18 +1,10 @@
 import 'package:New_Project_KMUTTNEWS/screens/activities_view.dart';
 import 'package:New_Project_KMUTTNEWS/screens/menu_view.dart';
 import 'package:New_Project_KMUTTNEWS/screens/news_view.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
-//import 'package:kmutt_news/screens/activities_view.dart';
-
-// import 'package:kmutt_news/screens/activies.dart';
-
-// import 'package:kmutt_news/screens/menu_view.dart';
-// import 'package:kmutt_news/screens/menu_view_user_login.dart';
-// import 'package:kmutt_news/screens/news_view.dart';
-
-// import 'models/viewdata_news.dart';
 
 class Launcher extends StatefulWidget {
   static const routeName = '/';
