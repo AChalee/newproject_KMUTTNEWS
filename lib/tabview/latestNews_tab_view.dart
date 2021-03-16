@@ -1,4 +1,4 @@
-import 'package:New_Project_KMUTTNEWS/tabview/read.dart';
+//import 'package:New_Project_KMUTTNEWS/tabview/read.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 //import 'package:firebase_core/firebase_core.dart';
@@ -15,74 +15,24 @@ class LatestNewsTabView extends StatefulWidget {
 }
 
 class _LatestNewsTabViewState extends State<LatestNewsTabView> {
-  @override
-  void initState() {
-    super.initState();
-    Firestore.instance
-        .collection("News")
-        .document(widget.newsTitle)
-        .get()
-        .then((value) {
-      setState(() {});
-    });
-    //Firebase.initializeApp();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   Firestore.instance
+  //       .collection("News")
+  //       .document(widget.newsTitle)
+  //       .get()
+  //       .then((value) {
+  //     setState(() {});
+  //   });
+  //   //Firebase.initializeApp();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // body: StreamBuilder(
-      //     stream: Firestore.instance.collection("News").snapshots(),
-      //     builder: (context, snapshot) {
-      //       if (!snapshot.hasData) {
-      //         return Center(
-      //           child: Column(
-      //             children: <Widget>[
-      //               CircularProgressIndicator(),
-      //               Text("Loading........."),
-      //             ],
-      //           ),
-      //         );
-      //       } else {
-      //         return ListView.builder(
-      //             itemCount: snapshot.data.documents.length,
-      //             itemBuilder: (context, index) {
-      //               return Padding(
-      //                 padding: const EdgeInsets.all(8.0),
-      //                 child: Card(
-      //                   child: Container(
-      //                     child: InkWell(
-      //                       onTap: () {
-      //                         Navigator.push(
-      //                             context,
-      //                             MaterialPageRoute(
-      //                                 builder: (context) => Read(
-      //                                     newsTitle: snapshot
-      //                                         .data.documents[index].documentID,
-      //                                     newsContent: snapshot
-      //                                         .data
-      //                                         .documents[index]
-      //                                         .data["content"])));
-      //                       },
-      //                       child: Column(
-      //                         children: [
-      //                           ListTile(
-      //                             title: Text(snapshot
-      //                                 .data.documents[index].documentID),
-      //                             subtitle: Text(
-      //                                 snapshot.data.documents[index]["title"]),
-      //                           )
-      //                         ],
-      //                       ),
-      //                     ),
-      //                   ),
-      //                 ),
-      //               );
-      //             });
-      //       }
-      //     }),
       body: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection("News").snapshots(),
+          stream: FirebaseFirestore.instance.collection("MyApp").snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Center(

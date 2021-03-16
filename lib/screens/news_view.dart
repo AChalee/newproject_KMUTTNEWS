@@ -1,5 +1,6 @@
 import 'package:New_Project_KMUTTNEWS/tabview/latestNews_tab_view.dart';
-import 'package:New_Project_KMUTTNEWS/tabview/post_tab.dart';
+import 'package:New_Project_KMUTTNEWS/tabview/post_news_tab.dart';
+//import 'package:New_Project_KMUTTNEWS/tabview/post_tab.dart';
 import 'package:New_Project_KMUTTNEWS/tabview/trendingAct_tab_view.dart';
 import 'package:flutter/material.dart';
 
@@ -81,7 +82,7 @@ class _NewsState extends State<News> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddData()));
+              context, MaterialPageRoute(builder: (context) => AddNews()));
         },
         child: Icon(Icons.border_color),
         backgroundColor: Colors.orange,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'package:kmutt_news/screens/login_view.dart';
+import 'package:New_Project_KMUTTNEWS/screens/login_view.dart';
+
 // import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:kmutt_news/constants.dart';
 //import 'package:kmutt_news/widgets/category_card.dart';
@@ -18,12 +19,13 @@ class _AddMoreState extends State<AddMore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: new Text(
             'KMUTT NEWS',
             style: TextStyle(
                 fontSize: 24,
-                fontFamily: 'Prompt',
+                fontFamily: 'Itim',
                 color: Colors.white,
                 fontStyle: FontStyle.italic),
           ),
@@ -40,12 +42,12 @@ class _AddMoreState extends State<AddMore> {
                 margin: EdgeInsets.all(8.0),
                 child: InkWell(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => Login(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Login(),
+                      ),
+                    );
                   },
                   splashColor: Colors.orange[500],
                   child: Center(
@@ -53,16 +55,21 @@ class _AddMoreState extends State<AddMore> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ImageIcon(
-                          AssetImage("assets/icons/password.png"),
-                          size: 50.0,
+                          AssetImage('assets/image/lock.png'),
+                          size: 50,
+                          color: Colors.yellow,
                         ),
                         SizedBox(
                           height: 16,
                         ),
                         Text(
                           "Login",
-                          style: TextStyle(fontSize: 20),
-                        )
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 17,
+                            fontFamily: 'Itim',
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -78,7 +85,7 @@ class _AddMoreState extends State<AddMore> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ImageIcon(
-                          AssetImage("assets/icons/heart.png"),
+                          AssetImage('assets/image/lock.png'),
                           size: 50.0,
                         ),
                         SizedBox(
@@ -86,8 +93,12 @@ class _AddMoreState extends State<AddMore> {
                         ),
                         Text(
                           "Save",
-                          style: TextStyle(fontSize: 20),
-                        )
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 17,
+                            fontFamily: 'Itim',
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -103,7 +114,7 @@ class _AddMoreState extends State<AddMore> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ImageIcon(
-                          AssetImage("assets/icons/speaker.png"),
+                          AssetImage('assets/image/lock.png'),
                           size: 50.0,
                         ),
                         SizedBox(
@@ -111,7 +122,11 @@ class _AddMoreState extends State<AddMore> {
                         ),
                         Text(
                           "Public\nRelations",
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 17,
+                            fontFamily: 'Itim',
+                          ),
                         )
                       ],
                     ),
@@ -128,7 +143,7 @@ class _AddMoreState extends State<AddMore> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         ImageIcon(
-                          AssetImage("assets/icons/gear.png"),
+                          AssetImage('assets/image/lock.png'),
                           size: 50.0,
                         ),
                         SizedBox(
@@ -136,7 +151,11 @@ class _AddMoreState extends State<AddMore> {
                         ),
                         Text(
                           "Setting",
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 17,
+                            fontFamily: 'Itim',
+                          ),
                         )
                       ],
                     ),

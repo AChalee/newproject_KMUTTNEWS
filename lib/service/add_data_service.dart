@@ -9,8 +9,8 @@ import 'logger_service.dart';
 Future<void> addItem(
     BuildContext context, Map<String, dynamic> data, String documentName) {
   return Firestore.instance
-      .collection("News")
-      .document(documentName)
+      .collection("MyApp")
+      .document("Activities")
       .setData(data)
       .then((returnData) {
     showMessageBox(context, "Success", "Added item($documentName) to Firestore",

@@ -1,25 +1,25 @@
 import 'package:New_Project_KMUTTNEWS/component/show_notification.dart';
-import 'package:New_Project_KMUTTNEWS/service/add_data_service.dart';
 import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
 import 'package:flutter/material.dart';
 
-class AddData extends StatefulWidget {
+class AddNews extends StatefulWidget {
   @override
-  _AddDataState createState() => _AddDataState();
+  _AddNewsState createState() => _AddNewsState();
 }
 
-class _AddDataState extends State<AddData> {
+class _AddNewsState extends State<AddNews> {
   final newsTitle = TextEditingController();
   final newsContent = TextEditingController();
-
-  String category;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("๊ข่าวสารวันนี้"),
-        backgroundColor: Colors.orange,
+        title: Text(
+          "ข่าวสารวันนี้",
+          style: TextStyle(
+              color: Colors.white, fontFamily: 'Prompt', fontSize: 24),
+        ),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -34,15 +34,15 @@ class _AddDataState extends State<AddData> {
                       controller: newsTitle,
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
-                          hintText: 'หัวข้อข่าวสาร',
+                          hintText: "หัวข้อข่าวสาร",
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5.0),
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 32.0)),
                           focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
                               borderSide:
-                                  BorderSide(color: Colors.grey, width: 1.0),
-                              borderRadius: BorderRadius.circular(5.0))),
+                                  BorderSide(color: Colors.grey, width: 1.0))),
                     ),
                     Padding(padding: const EdgeInsets.all(10)),
                     TextFormField(
@@ -50,38 +50,21 @@ class _AddDataState extends State<AddData> {
                       maxLines: 7,
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
-                          hintText: 'รายละเอียด',
+                          hintText: "รายละเอียด",
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0),
-                            borderSide: BorderSide(
-                              color: Colors.grey,
-                              width: 32.0,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
                               borderSide:
-                                  BorderSide(color: Colors.grey, width: 1.0),
-                              borderRadius: BorderRadius.circular(5.0))),
+                                  BorderSide(color: Colors.grey, width: 1.0))),
                     ),
                     Padding(padding: const EdgeInsets.all(10)),
                     RaisedButton(
-                        child: Text("Post"),
+                        child: Text("โพสต์"),
                         onPressed: () {
                           if (newsTitle.text == "" || newsContent.text == "") {
-                            showMessageBox(context, "ERROR",
-                                "Please enter title and content before adding to firebase",
+                            showMessageBox(
+                                context, "ผิดพลาด", "กรุณากรอกรายละเอียด",
                                 actions: [dismissButton(context)]);
-                            logger.e("title or content can't be null");
-                          } else {
-                            addItem(
-                                context,
-                                {
-                                  "title": newsTitle.text,
-                                  "content": newsContent.text
-                                },
-                                newsTitle.text);
-                            newsTitle.text = "";
-                            newsContent.text = "";
+                                logger.e("message")
                           }
                         })
                   ],
