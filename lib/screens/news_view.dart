@@ -1,5 +1,6 @@
 import 'package:New_Project_KMUTTNEWS/tabview/latestNews_tab_view.dart';
 import 'package:New_Project_KMUTTNEWS/tabview/post_news_tab.dart';
+import 'package:New_Project_KMUTTNEWS/tabview/trend_news_header.dart';
 //import 'package:New_Project_KMUTTNEWS/tabview/post_tab.dart';
 import 'package:New_Project_KMUTTNEWS/tabview/trendingAct_tab_view.dart';
 import 'package:flutter/material.dart';
@@ -39,44 +40,14 @@ class _NewsState extends State<News> {
         ],
       ),
       //-----------------------------------------------------Tabbar View-------------------------------------------------------------
-      body: DefaultTabController(
-        length: 2,
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              Container(
-                constraints: BoxConstraints.expand(height: 50),
-                child: TabBar(
-                    indicatorWeight: 3,
-                    indicatorColor: Colors.orange,
-                    labelColor: Colors.orange,
-                    unselectedLabelColor: Colors.grey,
-                    tabs: [
-                      Tab(
-                        child: Text(
-                          "ข่าวสารล่าสุด",
-                          style: TextStyle(fontSize: 17, fontFamily: 'Prompt'),
-                        ),
-                      ),
-                      Tab(
-                        child: Text(
-                          'ข่าวสารเป็นที่นิยม',
-                          style: TextStyle(fontSize: 17, fontFamily: 'Prompt'),
-                        ),
-                      )
-                    ]),
-              ),
-              Expanded(
-                child: Container(
-                  child: TabBarView(children: [
-                    LatestNewsTabView(),
-                    TrendingActTabView(),
-                  ]),
-                ),
-              )
-            ],
+      body: Column(
+        children: <Widget>[
+          TrendNewsHeader(),
+          Text("Lastest News"),
+          Expanded(
+            child: LatestNewsTabView(),
           ),
-        ),
+        ],
       ),
       // --------------------------------------------add text------------------------------------------------------
       floatingActionButton: FloatingActionButton(

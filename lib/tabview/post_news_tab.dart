@@ -64,7 +64,7 @@ class _AddNewsState extends State<AddNews> {
                             showMessageBox(
                                 context, "ผิดพลาด", "กรุณากรอกรายละเอียด",
                                 actions: [dismissButton(context)]);
-                                logger.e("message")
+                            logger.e("message");
                           }
                         })
                   ],

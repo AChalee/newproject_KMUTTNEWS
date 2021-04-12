@@ -1,4 +1,5 @@
 import 'package:New_Project_KMUTTNEWS/launcher.dart';
+import 'package:New_Project_KMUTTNEWS/screens/news_detail.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/', //สามารถใช้ home แทนได้
       routes: {
         Launcher.routeName: (context) => Launcher(),
+        NewsDetail.routeName: (context) => NewsDetail(),
       },
     );
   }
