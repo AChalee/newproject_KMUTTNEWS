@@ -1,6 +1,7 @@
+import 'package:New_Project_KMUTTNEWS/constants.dart';
 import 'package:New_Project_KMUTTNEWS/tabview/latestAct_tab_view.dart';
 import 'package:New_Project_KMUTTNEWS/tabview/post_tab.dart';
-import 'package:New_Project_KMUTTNEWS/tabview/trendingAct_tab_view.dart';
+//import 'package:New_Project_KMUTTNEWS/tabview/trendingAct_tab_view.dart';
 import 'package:flutter/material.dart';
 //import 'package:kmutt_news/views/addData.dart';
 
@@ -45,42 +46,33 @@ class _ActivitiesState extends State<Activities> {
         ],
       ),
       // --------------------------------Tabbar View--------------------------------
-      body: DefaultTabController(
-        length: 2,
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              Container(
-                constraints: BoxConstraints.expand(height: 50),
-                child: TabBar(
-                  indicatorWeight: 3,
-                  indicatorColor: Colors.orange,
-                  labelColor: Colors.orange,
-                  unselectedLabelColor: Colors.grey,
-                  tabs: [
-                    Tab(
-                        child: Text('กิจกรรมล่าสุด',
-                            style:
-                                TextStyle(fontSize: 17, fontFamily: 'Prompt'))),
-                    Tab(
-                        child: Text(
-                      'กิจกรรมเป็นที่นิยม',
-                      style: TextStyle(fontSize: 17, fontFamily: 'Prompt'),
-                    )),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  child: TabBarView(children: [
-                    LatestActTabView(),
-                    TrendingActTabView(),
-                  ]),
-                ),
-              )
-            ],
+      body: Column(
+        children: <Widget>[
+          //TrendActHeader(),
+          SizedBox(
+            height: 20,
           ),
-        ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Padding(
+              padding: EdgeInsets.only(left: 19.0),
+              child: Text(
+                "กิจกรรมล่าสุด",
+                style: kNonActiveTabStyle,
+              ),
+            ),
+          ),
+          Divider(
+            color: Colors.grey[500],
+            indent: 15,
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Expanded(
+            child: LatestActTabView(),
+          )
+        ],
       ),
       // --------------------------------------------add text------------------------------------------------------
       floatingActionButton: FloatingActionButton(

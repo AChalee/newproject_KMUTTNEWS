@@ -36,10 +36,9 @@ dependencies:
   firebase_storage: ^4.0.0
   firebase_auth: ^0.18.0+1
   google_sign_in: ^4.4.4
-   
   flutter_local_notifications: ^3.0.1+6
   logger: ^0.9.4
- 
+
 
 
 

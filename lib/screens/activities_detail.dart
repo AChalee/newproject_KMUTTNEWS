@@ -1,25 +1,24 @@
-import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class NewsDetail extends StatefulWidget {
-  static final routeName = "/news/detail";
+class ActivitiesDatail extends StatefulWidget {
+  static final routeName = "/activities/detail";
   @override
-  _NewsDetailState createState() => _NewsDetailState();
+  _ActivitiesDatailState createState() => _ActivitiesDatailState();
 }
 
-class _NewsDetailState extends State<NewsDetail> {
+class _ActivitiesDatailState extends State<ActivitiesDatail> {
   @override
   Widget build(BuildContext context) {
-    final NewsDetailParams params =
-        ModalRoute.of(context).settings.arguments as NewsDetailParams;
+    final ActivitiesDatailParams params =
+        ModalRoute.of(context).settings.arguments as ActivitiesDatailParams;
     return Scaffold(
       appBar: AppBar(
         title: Text(params.title),
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
-            .collection("News")
+            .collection("Activities")
             .doc(params.id)
             .snapshots(),
         builder: (context, snapshot) {
@@ -28,7 +27,7 @@ class _NewsDetailState extends State<NewsDetail> {
               child: Column(
                 children: <Widget>[
                   CircularProgressIndicator(),
-                  Text("Loading........."),
+                  Text("Loading......................"),
                 ],
               ),
             );
@@ -44,20 +43,10 @@ class _NewsDetailState extends State<NewsDetail> {
               ),
             );
           }
-          if (snapshot.hasError) {
-            logger.e("Fetch news error : ${snapshot.error.toString()}");
-            return Center(
-              child: Column(
-                children: <Widget>[
-                  Text("Error Something........."),
-                ],
-              ),
-            );
-          }
           return Center(
             child: Column(
               children: <Widget>[
-                Text("No Data........."),
+                Text("No Data..............."),
               ],
             ),
           );
@@ -67,9 +56,9 @@ class _NewsDetailState extends State<NewsDetail> {
   }
 }
 
-class NewsDetailParams {
-  final String id; //กดมาจากหน้า latestNews
+class ActivitiesDatailParams {
+  final String id;
   final String title;
 
-  NewsDetailParams(this.id, this.title);
+  ActivitiesDatailParams(this.id, this.title);
 }

@@ -2,8 +2,12 @@ import 'package:New_Project_KMUTTNEWS/tabview/latestNews_tab_view.dart';
 import 'package:New_Project_KMUTTNEWS/tabview/post_news_tab.dart';
 import 'package:New_Project_KMUTTNEWS/tabview/trend_news_header.dart';
 //import 'package:New_Project_KMUTTNEWS/tabview/post_tab.dart';
-import 'package:New_Project_KMUTTNEWS/tabview/trendingAct_tab_view.dart';
+//import 'package:New_Project_KMUTTNEWS/tabview/trendingAct_tab_view.dart';
 import 'package:flutter/material.dart';
+
+import '../constants.dart';
+
+//import '../constants.dart';
 
 class News extends StatefulWidget {
   static const routeName = '/news';
@@ -43,7 +47,31 @@ class _NewsState extends State<News> {
       body: Column(
         children: <Widget>[
           TrendNewsHeader(),
-          Text("Lastest News"),
+          SizedBox(
+            height: 20,
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Padding(
+              padding: EdgeInsets.only(left: 19.0),
+              child: Text(
+                "ข่าวสารล่าสุด",
+                style: kNonActiveTabStyle,
+              ),
+            ),
+          ),
+
+          Divider(
+            color: Colors.grey[500],
+            indent: 15,
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          // Text(
+          //   "ข่าวสารล่าสุด",
+          //   style: kNonActiveTabStyle,
+          // ),
           Expanded(
             child: LatestNewsTabView(),
           ),

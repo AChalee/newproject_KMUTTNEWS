@@ -40,26 +40,29 @@ class _TrendNewsHeaderState extends State<TrendNewsHeader> {
                 return Container(
                   width: 250,
                   margin: EdgeInsets.all(8),
-                  child: ListTile(
-                    onTap: () async {
-                      await FirebaseFirestore.instance
-                          .collection("News")
-                          .doc(item.id)
-                          .update(
-                        {'view_count': item['view_count'] + 1},
-                      );
+                  child: Card(
+                    child: ListTile(
+                      onTap: () async {
+                        await FirebaseFirestore.instance
+                            .collection("News")
+                            .doc(item.id)
+                            .update(
+                          {'view_count': item['view_count'] + 1},
+                        );
 
-                      await Navigator.pushNamed(
-                        context,
-                        NewsDetail.routeName,
-                        arguments: NewsDetailParams(
-                          item.id,
-                          item['title'],
-                        ),
-                      );
-                    },
-                    title: Text(item['title']),
-                    subtitle: Text(item['detail']),
+                        await Navigator.pushNamed(
+                          context,
+                          NewsDetail.routeName,
+                          arguments: NewsDetailParams(
+                            item.id,
+                            item['title'],
+                          ),
+                        );
+                      },
+                      leading: Image.network(item['picture']),
+                      title: Text(item['title']),
+                      subtitle: Text(item['detail']),
+                    ),
                   ),
                 );
               },
