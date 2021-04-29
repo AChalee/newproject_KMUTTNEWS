@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 Future<void> addNewsItem(
     BuildContext context, Map<String, dynamic> data, String documentName) {
   return Firestore.instance
-      .collection("MyApp")
-      .document("News")
+      .collection("News")
+      .document()
       .set(data)
       .then((returnData) {
     showMessageBox(context, "Success", "Added Data to Firebase",

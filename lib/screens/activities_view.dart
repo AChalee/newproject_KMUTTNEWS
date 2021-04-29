@@ -1,12 +1,10 @@
 import 'package:New_Project_KMUTTNEWS/constants.dart';
 import 'package:New_Project_KMUTTNEWS/tabview/latestAct_tab_view.dart';
-import 'package:New_Project_KMUTTNEWS/tabview/post_tab.dart';
-//import 'package:New_Project_KMUTTNEWS/tabview/trendingAct_tab_view.dart';
-import 'package:flutter/material.dart';
-//import 'package:kmutt_news/views/addData.dart';
+import 'package:New_Project_KMUTTNEWS/tabview/post_activity_tab.dart';
 
-//import 'package:kmutt_news/views/latestAct_tab_view.dart';
-//import 'package:kmutt_news/views/trendingAct_tab_view.dart';
+import 'package:New_Project_KMUTTNEWS/tabview/trend_activities_header.dart';
+
+import 'package:flutter/material.dart';
 
 class Activities extends StatefulWidget {
   static const routeName = '/activities';
@@ -48,7 +46,7 @@ class _ActivitiesState extends State<Activities> {
       // --------------------------------Tabbar View--------------------------------
       body: Column(
         children: <Widget>[
-          //TrendActHeader(),
+          TrendActivitiesHeader(),
           SizedBox(
             height: 20,
           ),
@@ -77,8 +75,8 @@ class _ActivitiesState extends State<Activities> {
       // --------------------------------------------add text------------------------------------------------------
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddData()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AddActivities()));
         },
         child: Icon(Icons.border_color),
         backgroundColor: Colors.orange,

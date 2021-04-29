@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ActivitiesDatail extends StatefulWidget {
-  static final routeName = "/activities/detail";
+  static const routeName = "/activities/detail";
   @override
   _ActivitiesDatailState createState() => _ActivitiesDatailState();
 }

@@ -1,4 +1,6 @@
+import 'package:New_Project_KMUTTNEWS/constants.dart';
 import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
+import 'package:New_Project_KMUTTNEWS/widget/circle_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -14,9 +16,37 @@ class _NewsDetailState extends State<NewsDetail> {
     final NewsDetailParams params =
         ModalRoute.of(context).settings.arguments as NewsDetailParams;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(params.title),
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(65.0),
+        child: Center(
+          child: SafeArea(
+              child: Padding(
+            padding: EdgeInsets.fromLTRB(18.0, 15.0, 18.0, 0),
+            child: Row(
+              children: [
+                CircleButton(
+                  icon: Icons.arrow_back_ios,
+                  onTap: () => Navigator.pop(context),
+                ),
+                Spacer(),
+                CircleButton(
+                  icon: Icons.share,
+                  onTap: () {},
+                ),
+                CircleButton(
+                  icon: Icons.favorite_border,
+                  onTap: () {},
+                ),
+              ],
+            ),
+          )),
+        ),
       ),
+
+      // appBar: AppBar(
+      //   title: Text(params.title),
+      // ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("News")
@@ -36,10 +66,44 @@ class _NewsDetailState extends State<NewsDetail> {
           if (snapshot.hasData) {
             final item = snapshot.data;
             return Container(
-              child: Column(
+              padding: EdgeInsets.symmetric(horizontal: 18.0),
+              // child: Column(
+              //   children: [
+              //     Text(item['detail']),
+              //     TextFormField(initialValue: item['detail'])
+              //   ],
+              // ),
+              child: ListView(
                 children: [
-                  Text(item['detail']),
-                  TextFormField(initialValue: item['detail'])
+                  SizedBox(
+                    height: 12.0,
+                  ),
+                  Hero(
+                    tag: item['view_count'],
+                    child: Container(
+                      height: 220.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        image: DecorationImage(
+                            image: NetworkImage(item['picture']),
+                            fit: BoxFit.fill),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  Text(
+                    item['title'],
+                    style: kTitleCard.copyWith(fontSize: 20.0),
+                  ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  Text(
+                    item['detail'],
+                    style: descriptionStyle,
+                  )
                 ],
               ),
             );

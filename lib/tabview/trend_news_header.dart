@@ -1,3 +1,4 @@
+import 'package:New_Project_KMUTTNEWS/constants.dart';
 import 'package:New_Project_KMUTTNEWS/screens/news_detail.dart';
 import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -37,31 +38,103 @@ class _TrendNewsHeaderState extends State<TrendNewsHeader> {
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) {
                 final item = snapshot.data.documents[index];
-                return Container(
-                  width: 250,
-                  margin: EdgeInsets.all(8),
-                  child: Card(
-                    child: ListTile(
-                      onTap: () async {
-                        await FirebaseFirestore.instance
-                            .collection("News")
-                            .doc(item.id)
-                            .update(
-                          {'view_count': item['view_count'] + 1},
-                        );
+                // return Container(
+                //   width: 250,
+                //   margin: EdgeInsets.all(8),
+                //   child: Card(
+                //     child: ListTile(
+                //       onTap: () async {
+                //         await FirebaseFirestore.instance
+                //             .collection("News")
+                //             .doc(item.id)
+                //             .update(
+                //           {'view_count': item['view_count'] + 1},
+                //         );
 
-                        await Navigator.pushNamed(
-                          context,
-                          NewsDetail.routeName,
-                          arguments: NewsDetailParams(
-                            item.id,
-                            item['title'],
+                //         await Navigator.pushNamed(
+                //           context,
+                //           NewsDetail.routeName,
+                //           arguments: NewsDetailParams(
+                //             item.id,
+                //             item['title'],
+                //           ),
+                //         );
+                //       },
+                //       leading: Image.network(item['picture']),
+                //       title: Text(item['title']),
+                //       subtitle: Text(item['detail']),
+                //     ),
+                //   ),
+                // );
+                return InkWell(
+                  onTap: () async {
+                    await FirebaseFirestore.instance
+                        .collection("News")
+                        .doc(item.id)
+                        .update(
+                      {'view_count': item['view_count'] + 1},
+                    );
+                    await Navigator.pushNamed(
+                      context,
+                      NewsDetail.routeName,
+                      arguments: NewsDetailParams(
+                        item.id,
+                        item['title'],
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: 300.0,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: kGrey3, width: 1.0),
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    margin: EdgeInsets.fromLTRB(10, 15, 10, 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Expanded(
+                          child: Hero(
+                            tag: item['view_count'],
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                image: DecorationImage(
+                                    image: NetworkImage(item['picture']),
+                                    fit: BoxFit.cover),
+                              ),
+                            ),
                           ),
-                        );
-                      },
-                      leading: Image.network(item['picture']),
-                      title: Text(item['title']),
-                      subtitle: Text(item['detail']),
+                        ),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Text(
+                          item['title'],
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: kTitleCard,
+                        ),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                                child: Text(
+                              item['detail'],
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              style: kDetailContent,
+                            ))
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 );

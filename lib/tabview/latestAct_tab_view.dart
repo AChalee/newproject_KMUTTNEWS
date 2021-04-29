@@ -1,5 +1,5 @@
 import 'package:New_Project_KMUTTNEWS/screens/activities_detail.dart';
-import 'package:New_Project_KMUTTNEWS/screens/activities_view.dart';
+//import 'package:New_Project_KMUTTNEWS/screens/activities_view.dart';
 import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -41,26 +41,7 @@ class _LatestActTabViewState extends State<LatestActTabView> {
                     itemBuilder: (context, index) {
                       final DocumentSnapshot item =
                           snapshot.data.documents[index];
-                      // return ListTile(
-                      //   onTap: () async {
-                      //     await Firestore.instance
-                      //         .collection("Activities")
-                      //         .doc(item.id)
-                      //         .update(
-                      //       {'view_count': item['view_count'] + 1},
-                      //     );
-                      //     await Navigator.pushNamed(
-                      //       context,
-                      //       Activities.routeName,
-                      //       arguments: ActivitiesDatailParams(
-                      //         item.id,
-                      //         item['title'],
-                      //       ),
-                      //     );
-                      //   },
-                      //   title: Text(item['title']),
-                      //   subtitle: Text(item['detail']),
-                      // );
+
                       return InkWell(
                         onTap: () async {
                           await FirebaseFirestore.instance
@@ -71,7 +52,7 @@ class _LatestActTabViewState extends State<LatestActTabView> {
                           );
                           await Navigator.pushNamed(
                             context,
-                            Activities.routeName,
+                            ActivitiesDatail.routeName,
                             arguments: ActivitiesDatailParams(
                               item.id,
                               item['title'],
