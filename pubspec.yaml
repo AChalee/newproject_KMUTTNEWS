@@ -38,6 +38,11 @@ dependencies:
   google_sign_in: ^4.4.4
   flutter_local_notifications: ^3.0.1+6
   logger: ^0.9.4
+  intl:
+  image_picker:
+  image_cropper:
+ 
+  permission_handler:  
   #image_picker: ^0.7.4
 
 

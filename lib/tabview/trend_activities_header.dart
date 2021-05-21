@@ -87,18 +87,27 @@ class _TrendActivitiesHeaderState extends State<TrendActivitiesHeader> {
                             height: 5.0,
                           ),
                           Expanded(
-                            child: Hero(
-                              tag: item['view_count'],
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  image: DecorationImage(
-                                    image: NetworkImage(item['picture']),
-                                    fit: BoxFit.cover,
-                                  ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                image: DecorationImage(
+                                  image: NetworkImage(item['picture']),
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
+                            // child: Hero(
+                            //   tag: item['view_count'],
+                            //   child: Container(
+                            //     decoration: BoxDecoration(
+                            //       borderRadius: BorderRadius.circular(15),
+                            //       image: DecorationImage(
+                            //         image: NetworkImage(item['picture']),
+                            //         fit: BoxFit.cover,
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                           ),
                           SizedBox(
                             height: 5.0,

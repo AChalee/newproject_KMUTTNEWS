@@ -1,25 +1,53 @@
+import 'dart:io';
+
 import 'package:New_Project_KMUTTNEWS/component/show_notification.dart';
+import 'package:New_Project_KMUTTNEWS/constants.dart';
+//import 'package:New_Project_KMUTTNEWS/screens/news_detail.dart';
+import 'package:New_Project_KMUTTNEWS/service/add_news_service.dart';
 import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:logger/logger.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 class AddNews extends StatefulWidget {
+  AddNews({Key key}) : super(key: key);
+
   @override
   _AddNewsState createState() => _AddNewsState();
 }
 
 class _AddNewsState extends State<AddNews> {
-  final newsTitle = TextEditingController();
-  final newsContent = TextEditingController();
+  final newstitle = TextEditingController();
+  final newsdetail = TextEditingController();
+  Logger logger = Logger();
+  final picker = ImagePicker();
+  File _image;
+
+  Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    setState(() {
+      if (pickedFile != null) {
+        _image = pickedFile.path as File;
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    DateTime dateNow = DateTime.now();
+    Timestamp dateTimeStamp = Timestamp.fromDate(dateNow);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "ข่าวสารวันนี้",
-          style: TextStyle(
-              color: Colors.white, fontFamily: 'Prompt', fontSize: 24),
+          'ข่าวสารวันนี้',
+          style: TextStyle(color: Colors.white),
         ),
+        backgroundColor: Colors.orange[700],
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -29,47 +57,70 @@ class _AddNewsState extends State<AddNews> {
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   children: <Widget>[
-                    Padding(padding: const EdgeInsets.all(10)),
+                    Card(
+                      shadowColor: kGrey3,
+                      child: IconButton(
+                          icon: Icon(Icons.add_a_photo),
+                          onPressed: () {
+                            getImage();
+                          }),
+                    ),
+                    // InkWell(
+
+                    //   child: IconButton(
+                    //       icon: Icon(Icons.add_a_photo),
+                    //       onPressed: () {
+                    //         getImage();
+                    //       }),
+                    // ),
                     TextFormField(
-                      controller: newsTitle,
-                      keyboardType: TextInputType.text,
                       decoration: InputDecoration(
-                          hintText: "หัวข้อข่าวสาร",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                              borderSide:
-                                  BorderSide(color: Colors.grey, width: 32.0)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                              borderSide:
-                                  BorderSide(color: Colors.grey, width: 1.0))),
+                        labelText: "หัวข้อข่าว",
+                      ),
+                      controller: newstitle,
                     ),
                     Padding(padding: const EdgeInsets.all(10)),
                     TextFormField(
-                      controller: newsContent,
-                      maxLines: 7,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                          hintText: "รายละเอียด",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                              borderSide:
-                                  BorderSide(color: Colors.grey, width: 1.0))),
+                      decoration: InputDecoration(labelText: "รายละเอียด"),
+                      controller: newsdetail,
                     ),
+                    // Container(
+                    //   height: 100,
+                    //   width: 100,
+                    //   color: Colors.black,
+                    //   child: RaisedButton(
+                    //     onPressed: () {
+                    //       getImage();
+                    //     },
+                    //   ),
+                    // ),
                     Padding(padding: const EdgeInsets.all(10)),
                     RaisedButton(
-                        child: Text("โพสต์"),
+                        child: Text(
+                          "โพสต์",
+                          style: kTitleCard,
+                        ),
                         onPressed: () {
-                          if (newsTitle.text == "" || newsContent.text == "") {
-                            showMessageBox(
-                                context, "ผิดพลาด", "กรุณากรอกรายละเอียด",
+                          if (newstitle.text == "" || newsdetail.text == '') {
+                            showMessageBox(context, "error",
+                                "กรุณากรอกรายละเอียดก่อนโพสต์",
                                 actions: [dismissButton(context)]);
-                            logger.e("message");
+                            logger.e("newstitle or newsdetail can not be null");
+                          } else {
+                            addNewsItem(
+                              context,
+                              {
+                                "picture": _image,
+                                "create_at": dateTimeStamp,
+                                "title": newstitle.text,
+                                "detail": newsdetail.text
+                              },
+                            );
                           }
                         })
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

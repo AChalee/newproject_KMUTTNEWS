@@ -78,16 +78,25 @@ class _NewsDetailState extends State<NewsDetail> {
                   SizedBox(
                     height: 12.0,
                   ),
-                  Hero(
-                    tag: item['view_count'],
-                    child: Container(
-                      height: 220.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        image: DecorationImage(
-                            image: NetworkImage(item['picture']),
-                            fit: BoxFit.fill),
-                      ),
+                  // Hero(
+                  //   tag: null,
+                  //   child: Container(
+                  //     height: 220.0,
+                  //     decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(15.0),
+                  //       image: DecorationImage(
+                  //           image: NetworkImage(item['picture']),
+                  //           fit: BoxFit.fill),
+                  //     ),
+                  //   ),
+                  // ),
+                  Container(
+                    height: 220.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15.0),
+                      image: DecorationImage(
+                          image: NetworkImage(item['picture']),
+                          fit: BoxFit.fill),
                     ),
                   ),
                   SizedBox(

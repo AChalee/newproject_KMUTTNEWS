@@ -12,6 +12,7 @@ class LatestNewsTabView extends StatefulWidget {
   final String newsTitle;
   final String newsContent;
   // final News news;
+  //
 
   @override
   _LatestNewsTabViewState createState() => _LatestNewsTabViewState();
@@ -72,6 +73,7 @@ class _LatestNewsTabViewState extends State<LatestNewsTabView> {
 
                   return InkWell(
                     onTap: () async {
+                      logger.e(snapshot.data);
                       await FirebaseFirestore.instance
                           .collection("News")
                           .doc(item.id)

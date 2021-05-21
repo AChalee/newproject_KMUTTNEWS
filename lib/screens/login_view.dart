@@ -82,8 +82,8 @@ class Login extends StatelessWidget {
                         Expanded(
                             child: Container(
                           child: TabBarView(children: <Widget>[
-                            LoginTabView(),
-                            RegisterTabView(),
+                            // LoginTabView(),
+                            // RegisterTabView(),
                           ]),
                         ))
                       ],
