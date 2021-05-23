@@ -8,13 +8,28 @@ import '../constants.dart';
 
 class EditNews extends StatefulWidget {
   static final routeName = "/news/edit";
+
   @override
   _EditNewsState createState() => _EditNewsState();
 }
 
 class _EditNewsState extends State<EditNews> {
+  final _formKey = GlobalKey<FormState>();
+
+  TextEditingController titleController;
+  TextEditingController detailController;
   @override
-  // Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      final NewsEditParams params =
+          ModalRoute.of(context).settings.arguments as NewsEditParams;
+      titleController = TextEditingController(text: params.title);
+      detailController = TextEditingController(text: params.detail);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final NewsEditParams params =
         ModalRoute.of(context).settings.arguments as NewsEditParams;
@@ -32,22 +47,11 @@ class _EditNewsState extends State<EditNews> {
                   icon: Icons.arrow_back_ios,
                   onTap: () => Navigator.pop(context),
                 ),
-
-                // StreamBuilder(
-                //   stream: FirebaseFirestore.instance.collection(''),
-                //   builder: (context, snapshot) {
-                //     return Container();
-                //   },
-                // )
               ],
             ),
           )),
         ),
       ),
-
-      // appBar: AppBar(
-      //   title: Text(params.title),
-      // ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("News")
@@ -66,55 +70,61 @@ class _EditNewsState extends State<EditNews> {
           }
           if (snapshot.hasData) {
             final item = snapshot.data;
-            return Container(
-              padding: EdgeInsets.symmetric(horizontal: 18.0),
-              // child: Column(
-              //   children: [
-              //     Text(item['detail']),
-              //     TextFormField(initialValue: item['detail'])
-              //   ],
-              // ),
-              child: ListView(
-                children: [
-                  SizedBox(
-                    height: 12.0,
-                  ),
-                  // Hero(
-                  //   tag: null,
-                  //   child: Container(
-                  //     height: 220.0,
-                  //     decoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(15.0),
-                  //       image: DecorationImage(
-                  //           image: NetworkImage(item['picture']),
-                  //           fit: BoxFit.fill),
-                  //     ),
-                  //   ),
-                  // ),
-                  Container(
-                    height: 220.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.0),
-                      image: DecorationImage(
-                          image: NetworkImage(item['picture']),
-                          fit: BoxFit.fill),
+            return Form(
+              key: _formKey,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 18.0),
+                child: ListView(
+                  children: [
+                    SizedBox(
+                      height: 12.0,
                     ),
-                  ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  Text(
-                    item['title'],
-                    style: kTitleCard.copyWith(fontSize: 20.0),
-                  ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  Text(
-                    item['detail'],
-                    style: descriptionStyle,
-                  )
-                ],
+                    Container(
+                      height: 220.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        image: DecorationImage(
+                            image: NetworkImage(item['picture']),
+                            fit: BoxFit.fill),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    Text(
+                      "หัวข้อ",
+                      style: kTitleCard.copyWith(fontSize: 20.0),
+                    ),
+                    TextFormField(
+                      controller: titleController,
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    Text(
+                      "รายละเอียด",
+                      style: descriptionStyle,
+                    ),
+                    TextFormField(
+                      controller: detailController,
+                    ),
+                    MaterialButton(
+                      onPressed: () async {
+                        await FirebaseFirestore.instance
+                            .collection("News")
+                            .doc(item.id)
+                            .update(
+                          {
+                            'title': titleController.text,
+                            'detail': detailController.text
+                          },
+                        );
+                      },
+                      child: Text('บันทึก'),
+                      color: kGrey3,
+                    ),
+                  ],
+                ),
               ),
             );
           }
@@ -145,6 +155,7 @@ class _EditNewsState extends State<EditNews> {
 class NewsEditParams {
   final String id; //กดมาจากหน้า latestNews
   final String title;
+  final String detail;
 
-  NewsEditParams(this.id, this.title);
+  NewsEditParams(this.id, this.title, this.detail);
 }

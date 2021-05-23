@@ -32,6 +32,7 @@ class _AddActivitiesState extends State<AddActivities> {
               file != null
                   ? Container(
                       child: Image.file(file),
+                      height: 200,
                     )
                   : Container(
                       child: Text('T'),

@@ -179,10 +179,13 @@ class _LatestNewsTabViewState extends State<LatestNewsTabView> {
                                             FlatButton(
                                               onPressed: () {
                                                 Navigator.pushNamed(
-                                                    context, EditNews.routeName,
-                                                    arguments: NewsEditParams(
-                                                        item.id,
-                                                        item['title']));
+                                                  context,
+                                                  EditNews.routeName,
+                                                  arguments: NewsEditParams(
+                                                      item.id,
+                                                      item['title'],
+                                                      item['detail']),
+                                                );
                                               },
                                               child: Text('แก้ไข'),
                                             ),
