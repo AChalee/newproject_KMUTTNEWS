@@ -6,11 +6,13 @@ import 'package:New_Project_KMUTTNEWS/constants.dart';
 import 'package:New_Project_KMUTTNEWS/service/add_news_service.dart';
 import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class AddNews extends StatefulWidget {
   AddNews({Key key}) : super(key: key);
@@ -23,19 +25,20 @@ class _AddNewsState extends State<AddNews> {
   final newstitle = TextEditingController();
   final newsdetail = TextEditingController();
   Logger logger = Logger();
-  final picker = ImagePicker();
-  File _image;
+  // final picker = ImagePicker();
+  // File _image;
+  String imageUrl;
 
-  Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      if (pickedFile != null) {
-        _image = pickedFile.path as File;
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
+  // Future getImage() async {
+  //   final pickedFile = await picker.getImage(source: ImageSource.gallery);
+  //   setState(() {
+  //     if (pickedFile != null) {
+  //       _image = pickedFile.path as File;
+  //     } else {
+  //       print('No image selected.');
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +65,8 @@ class _AddNewsState extends State<AddNews> {
                       child: IconButton(
                           icon: Icon(Icons.add_a_photo),
                           onPressed: () {
-                            getImage();
+                            //getImage();
+                            uploadImage();
                           }),
                     ),
                     // InkWell(
@@ -94,7 +98,7 @@ class _AddNewsState extends State<AddNews> {
                     //     },
                     //   ),
                     // ),
-                    Padding(padding: const EdgeInsets.all(10)),
+                    // Padding(padding: const EdgeInsets.all(10)),
                     RaisedButton(
                         child: Text(
                           "โพสต์",
@@ -110,10 +114,13 @@ class _AddNewsState extends State<AddNews> {
                             addNewsItem(
                               context,
                               {
-                                "picture": _image,
+                                "picture": imageUrl,
                                 "create_at": dateTimeStamp,
                                 "title": newstitle.text,
-                                "detail": newsdetail.text
+                                "detail": newsdetail.text,
+                                "view_count": 0,
+                                "user_id":
+                                    FirebaseAuth.instance.currentUser.uid,
                               },
                             );
                           }
@@ -126,5 +133,41 @@ class _AddNewsState extends State<AddNews> {
         ),
       ),
     );
+  }
+
+  uploadImage() async {
+    final _storage = FirebaseStorage.instance;
+    final _picker = ImagePicker();
+    PickedFile image;
+    //Check Permission
+    await Permission.photos.request();
+
+    var permissionStatus = await Permission.photos.status;
+
+    if (permissionStatus.isGranted) {
+      //Select Image
+
+      image = await _picker.getImage(source: ImageSource.gallery);
+      var file = File(image.path);
+
+      if (image != null) {
+        //Upload to Firebase
+        var snapshot = await _storage
+            .ref()
+            .child('NewsPhoto/imageName')
+            .putFile(file)
+            .onComplete;
+
+        var dowloadUrl = await snapshot.ref.getDownloadURL();
+
+        setState(() {
+          imageUrl = dowloadUrl;
+        });
+      } else {
+        print('No Path Received');
+      }
+    } else {
+      print('Grant Permissions and try again');
+    }
   }
 }

@@ -1,21 +1,23 @@
-import 'package:New_Project_KMUTTNEWS/constants.dart';
-import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
+import 'package:New_Project_KMUTTNEWS/screens/news_detail.dart';
+import 'package:New_Project_KMUTTNEWS/service/add_news_service.dart';
 import 'package:New_Project_KMUTTNEWS/widget/circle_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-class NewsDetail extends StatefulWidget {
-  static final routeName = "/news/detail";
+import '../constants.dart';
+
+class EditNews extends StatefulWidget {
+  static final routeName = "/news/edit";
   @override
-  _NewsDetailState createState() => _NewsDetailState();
+  _EditNewsState createState() => _EditNewsState();
 }
 
-class _NewsDetailState extends State<NewsDetail> {
+class _EditNewsState extends State<EditNews> {
   @override
+  // Widget build(BuildContext context) {
   Widget build(BuildContext context) {
-    final NewsDetailParams params =
-        ModalRoute.of(context).settings.arguments as NewsDetailParams;
+    final NewsEditParams params =
+        ModalRoute.of(context).settings.arguments as NewsEditParams;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -30,15 +32,7 @@ class _NewsDetailState extends State<NewsDetail> {
                   icon: Icons.arrow_back_ios,
                   onTap: () => Navigator.pop(context),
                 ),
-                Spacer(),
-                CircleButton(
-                  icon: Icons.share,
-                  onTap: () {},
-                ),
-                CircleButton(
-                  icon: Icons.favorite_border,
-                  onTap: () {},
-                ),
+
                 // StreamBuilder(
                 //   stream: FirebaseFirestore.instance.collection(''),
                 //   builder: (context, snapshot) {
@@ -146,10 +140,11 @@ class _NewsDetailState extends State<NewsDetail> {
     );
   }
 }
+// }
 
-class NewsDetailParams {
+class NewsEditParams {
   final String id; //กดมาจากหน้า latestNews
   final String title;
 
-  NewsDetailParams(this.id, this.title);
+  NewsEditParams(this.id, this.title);
 }

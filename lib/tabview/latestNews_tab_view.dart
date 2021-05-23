@@ -1,6 +1,9 @@
+import 'package:New_Project_KMUTTNEWS/screens/login_view.dart';
 import 'package:New_Project_KMUTTNEWS/screens/news_detail.dart';
 import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
+import 'package:New_Project_KMUTTNEWS/tabview/edit_news.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 
@@ -80,6 +83,10 @@ class _LatestNewsTabViewState extends State<LatestNewsTabView> {
                           .update(
                         {'view_count': item['view_count'] + 1},
                       );
+                      // FirebaseFirestore.instance
+                      //     .doc('News/${item['view_count'] + 1}');
+                      // await item.reference
+                      //     .update({'view_count': item['view_count'] + 1});
                       await Navigator.pushNamed(
                         context,
                         NewsDetail.routeName,
@@ -105,7 +112,6 @@ class _LatestNewsTabViewState extends State<LatestNewsTabView> {
                             border: Border.all(color: kGrey3, width: 1.0)),
                         child: Row(
                           children: [
-                            // Text(item['title']),
                             // Text(item['detail']),
                             //Image.network(item['picture']),
                             Container(
@@ -123,29 +129,109 @@ class _LatestNewsTabViewState extends State<LatestNewsTabView> {
                               width: 12.0,
                             ),
                             Expanded(
-                                child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    item['title'],
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
-                                    style: kTitleCard,
-                                  ),
-                                  SizedBox(
-                                    height: 4.0,
-                                  ),
-                                  Text(
-                                    item['detail'],
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
-                                    style: kDetailContent,
-                                  ),
-                                ],
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 5.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      item['title'],
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                      style: kTitleCard,
+                                    ),
+                                    SizedBox(
+                                      height: 4.0,
+                                    ),
+                                    Text(
+                                      item['detail'],
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                      style: kDetailContent,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ))
+                            ),
+                            IconButton(
+                                icon: Icon(Icons.more_vert),
+                                onPressed: () {
+                                  final auth = FirebaseAuth.instance;
+                                  if (auth.currentUser != null &&
+                                      auth.currentUser.uid == item['user_id']) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          content: Text('ตั้งค่า'),
+                                          actions: [
+                                            FlatButton(
+                                              onPressed: () async {
+                                                await FirebaseFirestore.instance
+                                                    .collection("News")
+                                                    .doc(item.id)
+                                                    .delete();
+
+                                                Navigator.pop(context);
+                                              },
+                                              child: Text('ลบออก'),
+                                            ),
+                                            FlatButton(
+                                              onPressed: () {
+                                                Navigator.pushNamed(
+                                                    context, EditNews.routeName,
+                                                    arguments: NewsEditParams(
+                                                        item.id,
+                                                        item['title']));
+                                              },
+                                              child: Text('แก้ไข'),
+                                            ),
+                                            FlatButton(
+                                              onPressed: () {
+                                                // Navigator.push(
+                                                //   context,
+                                                //   MaterialPageRoute(
+                                                //     builder: (context) =>
+                                                //         Login(),
+                                                //   ),
+                                                // );
+                                              },
+                                              child: Text('ยกเลิก'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //     builder: (context) => AddActivities(),
+                                    //   ),
+                                    // );
+                                  } else {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          content: Text('กรุณาเข้าสู่ระบบ'),
+                                          actions: [
+                                            FlatButton(
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Login(),
+                                                    ),
+                                                  );
+                                                },
+                                                child: Text('Login'))
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }
+                                }),
                           ],
                         ),
                       ),

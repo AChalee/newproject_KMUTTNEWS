@@ -28,7 +28,7 @@ dependencies:
   cloud_firestore: ^0.14.0
   
   dropdownfield: ^1.0.3
-  
+  fluttertoast:
   image: ^2.1.4
   google_fonts: ^1.1.0
   flutter_svg: ^0.19.0
@@ -36,12 +36,12 @@ dependencies:
   firebase_storage: ^4.0.0
   firebase_auth: ^0.18.0+1
   google_sign_in: ^4.4.4
-  flutter_local_notifications: ^3.0.1+6
+  #flutter_local_notifications: ^3.0.1+6
   logger: ^0.9.4
   intl:
   image_picker:
   image_cropper:
- 
+  font_awesome_flutter:
   permission_handler:  
   #image_picker: ^0.7.4
 
@@ -75,6 +75,19 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  fonts:
+  - family : Itim
+    fonts :
+      - asset : fonts/ITIM REGULAR.OTF
+  
+  assets :
+    
+    - assets/image/addImage.png
+    - assets/image/like.png
+    - assets/image/save.png
+    - assets/image/lock.png
+    - assets/image/settings.png
+    - assets/image/profile.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -111,3 +124,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+

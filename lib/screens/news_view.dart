@@ -1,11 +1,14 @@
 import 'package:New_Project_KMUTTNEWS/tabview/latestNews_tab_view.dart';
 import 'package:New_Project_KMUTTNEWS/tabview/post_news_tab.dart';
 import 'package:New_Project_KMUTTNEWS/tabview/trend_news_header.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:New_Project_KMUTTNEWS/tabview/post_tab.dart';
 //import 'package:New_Project_KMUTTNEWS/tabview/trendingAct_tab_view.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
+import 'login_view.dart';
 
 //import '../constants.dart';
 
@@ -80,8 +83,35 @@ class _NewsState extends State<News> {
       // --------------------------------------------add text------------------------------------------------------
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddNews()));
+          if (FirebaseAuth.instance.currentUser != null) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AddNews(),
+              ),
+            );
+          } else {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  content: Text('กรุณาเข้าสู่ระบบ'),
+                  actions: [
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Login(),
+                            ),
+                          );
+                        },
+                        child: Text('Login'))
+                  ],
+                );
+              },
+            );
+          }
         },
         child: Icon(Icons.border_color),
         backgroundColor: Colors.orange,

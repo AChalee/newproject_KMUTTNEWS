@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:New_Project_KMUTTNEWS/screens/login_view.dart';
 
@@ -78,7 +79,15 @@ class _AddMoreState extends State<AddMore> {
               Card(
                 margin: EdgeInsets.all(8.0),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () async {
+                    await FirebaseAuth.instance.signOut();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Login(),
+                      ),
+                    );
+                  },
                   splashColor: Colors.orange[500],
                   child: Center(
                     child: Column(
@@ -92,7 +101,7 @@ class _AddMoreState extends State<AddMore> {
                           height: 16,
                         ),
                         Text(
-                          "Save",
+                          "Logout",
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: 17,

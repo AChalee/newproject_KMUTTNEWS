@@ -70,11 +70,11 @@ class Login extends StatelessWidget {
                               unselectedLabelColor: Colors.grey,
                               tabs: [
                                 Tab(
-                                    child: Text('Sign In',
+                                    child: Text('Log in ',
                                         style: TextStyle(
                                             fontSize: 15, fontFamily: 'Itim'))),
                                 Tab(
-                                    child: Text('Sign Up',
+                                    child: Text('Register',
                                         style: TextStyle(
                                             fontSize: 15, fontFamily: 'Itim'))),
                               ]),
@@ -82,8 +82,8 @@ class Login extends StatelessWidget {
                         Expanded(
                             child: Container(
                           child: TabBarView(children: <Widget>[
-                            // LoginTabView(),
-                            // RegisterTabView(),
+                            LoginTabView(),
+                            RegisterTabView(),
                           ]),
                         ))
                       ],
