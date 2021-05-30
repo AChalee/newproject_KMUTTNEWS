@@ -3,16 +3,16 @@ import 'dart:io';
 
 import 'package:New_Project_KMUTTNEWS/component/show_notification.dart';
 import 'package:New_Project_KMUTTNEWS/constants.dart';
-//import 'package:New_Project_KMUTTNEWS/screens/news_detail.dart';
+
 import 'package:New_Project_KMUTTNEWS/service/add_news_service.dart';
-//import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
-//import 'package:image_cropper/image_cropper.dart';
+
 import 'package:permission_handler/permission_handler.dart';
 
 class AddNews extends StatefulWidget {
@@ -105,6 +105,11 @@ class _AddNewsState extends State<AddNews> {
                           style: kTitleCard,
                         ),
                         onPressed: () {
+                          var snapshot = _storage
+                              .ref()
+                              .child('NewsPhoto/imageName')
+                              .putFile(file)
+                              .onComplete;
                           if (newstitle.text == "" || newsdetail.text == '') {
                             showMessageBox(context, "error",
                                 "กรุณากรอกรายละเอียดก่อนโพสต์",
@@ -148,7 +153,7 @@ class _AddNewsState extends State<AddNews> {
       setState(() {
         file = File(image.path);
       });
-      print(file);
+      // print(file);
 
       //if (image != null) {
       //Upload to Firebase

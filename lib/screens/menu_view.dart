@@ -1,6 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:New_Project_KMUTTNEWS/screens/profile_user.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
+
 import 'package:New_Project_KMUTTNEWS/screens/login_view.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../constants.dart';
+
+//import 'dart:io';
 
 // import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:kmutt_news/constants.dart';
@@ -9,7 +17,7 @@ import 'package:New_Project_KMUTTNEWS/screens/login_view.dart';
 // import 'package:image/image.dart';
 
 class AddMore extends StatefulWidget {
-  static const routeName = '/more';
+  // static const routeName = '/more';
   @override
   State<StatefulWidget> createState() {
     return _AddMoreState();
@@ -17,20 +25,44 @@ class AddMore extends StatefulWidget {
 }
 
 class _AddMoreState extends State<AddMore> {
+  final auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: new Text(
-            'KMUTT NEWS',
+          title: Text(
+            "KMUTT NEWS",
             style: TextStyle(
                 fontSize: 24,
-                fontFamily: 'Itim',
+                fontFamily: 'Prompt',
                 color: Colors.white,
                 fontStyle: FontStyle.italic),
+            // style: TextStyle(
+            //   color: Colors.white,
+            //   fontSize: 20,
+            //   fontFamily: 'Itim',
+            // ),
           ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.lock_open,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                auth.signOut().then((value) {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) {
+                    return Login();
+                  }));
+                });
+              },
+            ),
+          ],
         ),
+        //-----------------------------------------------------Tabbar View-------------------------------------------------------------
         body: Container(
           padding: EdgeInsets.all(30),
           child: GridView.count(
@@ -55,21 +87,17 @@ class _AddMoreState extends State<AddMore> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        ImageIcon(
-                          AssetImage('assets/image/lock.png'),
-                          size: 50,
-                          color: Colors.yellow,
+                        Image.asset(
+                          'assets/image/lock.png',
+                          width: 60,
+                          height: 60,
                         ),
                         SizedBox(
                           height: 16,
                         ),
                         Text(
                           "Login",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 17,
-                            fontFamily: 'Itim',
-                          ),
+                          style: descriptionStyle,
                         ),
                       ],
                     ),
@@ -79,8 +107,37 @@ class _AddMoreState extends State<AddMore> {
               Card(
                 margin: EdgeInsets.all(8.0),
                 child: InkWell(
-                  onTap: () async {
-                    await FirebaseAuth.instance.signOut();
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Profile(),
+                      ),
+                    );
+                  },
+                  splashColor: Colors.orange[500],
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Image.asset(
+                          'assets/image/like.png',
+                          width: 60,
+                          height: 60,
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Text("Profile", style: descriptionStyle),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Card(
+                margin: EdgeInsets.all(8.0),
+                child: InkWell(
+                  onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -93,21 +150,15 @@ class _AddMoreState extends State<AddMore> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        ImageIcon(
-                          AssetImage('assets/image/lock.png'),
-                          size: 50.0,
+                        Image.asset(
+                          'assets/image/save.png',
+                          width: 60,
+                          height: 60,
                         ),
                         SizedBox(
                           height: 16,
                         ),
-                        Text(
-                          "Logout",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 17,
-                            fontFamily: 'Itim',
-                          ),
-                        ),
+                        Text("Save", style: descriptionStyle)
                       ],
                     ),
                   ),
@@ -116,88 +167,33 @@ class _AddMoreState extends State<AddMore> {
               Card(
                 margin: EdgeInsets.all(8.0),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Login(),
+                      ),
+                    );
+                  },
                   splashColor: Colors.orange[500],
                   child: Center(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        ImageIcon(
-                          AssetImage('assets/image/lock.png'),
-                          size: 50.0,
+                        Image.asset(
+                          'assets/image/settings.png',
+                          width: 60,
+                          height: 60,
                         ),
                         SizedBox(
                           height: 16,
                         ),
-                        Text(
-                          "Public\nRelations",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 17,
-                            fontFamily: 'Itim',
-                          ),
-                        )
+                        Text("Setting", style: descriptionStyle)
                       ],
                     ),
                   ),
                 ),
               ),
-              Card(
-                margin: EdgeInsets.all(8.0),
-                child: InkWell(
-                  onTap: () {},
-                  splashColor: Colors.orange[500],
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        ImageIcon(
-                          AssetImage('assets/image/lock.png'),
-                          size: 50.0,
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Text(
-                          "Setting",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 17,
-                            fontFamily: 'Itim',
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              )
-              // CategoryCard(
-              //   title: "Login",
-              //   imageSrc: "assets/icons/password.png",
-              //   press: () {
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //         builder: (context) => Login(),
-              //       ),
-              //     );
-              //   },
-              // ),
-              // CategoryCard(
-              //   title: "Save",
-              //   imageSrc: "assets/icons/heart.png",
-              //   press: () {},
-              // ),
-              // CategoryCard(
-              //   title: "Public\nRelations",
-              //   imageSrc: "assets/icons/speaker.png",
-              //   press: () {},
-              // ),
-              // CategoryCard(
-              //   title: "Setting",
-              //   imageSrc: "assets/icons/gear.png",
-              //   press: () {},
-              // ),
             ],
           ),
         ));

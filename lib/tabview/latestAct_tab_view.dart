@@ -126,50 +126,71 @@ class _LatestActTabViewState extends State<LatestActTabView> {
                                   icon: Icon(Icons.more_horiz),
                                   onPressed: () {
                                     final auth = FirebaseAuth.instance;
-                                    if (auth.currentUser != null &&
-                                        auth.currentUser.uid ==
-                                            item['user_id']) {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            content: Text('ตั้งค่า'),
-                                            actions: [
-                                              FlatButton(
-                                                onPressed: () async {
-                                                  await FirebaseFirestore
-                                                      .instance
-                                                      .collection("Activities")
-                                                      .doc(item.id)
-                                                      .delete();
 
-                                                  Navigator.pop(context);
-                                                },
-                                                child: Text('ลบออก'),
-                                              ),
-                                              FlatButton(
-                                                onPressed: () {
-                                                  Navigator.pushNamed(
-                                                    context,
-                                                    EditNews.routeName,
-                                                    arguments:
-                                                        ActivitiesEditParams(
-                                                      item.id,
-                                                      item['detail'],
-                                                      item['title'],
-                                                    ),
-                                                  );
-                                                },
-                                                child: Text('แก้ไข'),
-                                              ),
-                                              FlatButton(
-                                                onPressed: () {},
-                                                child: Text('ยกเลิก'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
+                                    try {
+                                      print('เช็ค loginใช้ไม่ได้โว้ยยย  : ');
+                                      print(auth.currentUser.uid);
+
+                                      print("item['user_id'] : ");
+                                      print(item['user_id']);
+
+                                      print("item['detail'] : ");
+                                      print(item['detail']);
+
+                                      // item.forEach((element) => print(element));
+
+                                    } on Exception catch (exception) {
+                                      // only executed if error is of type Exception
+                                    } catch (error) {
+                                      // executed for errors of all types other than Exception
+                                    }
+
+                                    if (auth.currentUser != null) {
+                                      if (auth.currentUser.uid ==
+                                          item['user_id']) {
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              content: Text('ตั้งค่า'),
+                                              actions: [
+                                                FlatButton(
+                                                  onPressed: () async {
+                                                    await FirebaseFirestore
+                                                        .instance
+                                                        .collection(
+                                                            "Activities")
+                                                        .doc(item.id)
+                                                        .delete();
+
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text('ลบออก'),
+                                                ),
+                                                FlatButton(
+                                                  onPressed: () {
+                                                    Navigator.pushNamed(
+                                                      context,
+                                                      EditActivities.routeName,
+                                                      arguments:
+                                                          ActivitiesEditParams(
+                                                        item.id,
+                                                        item['detail'],
+                                                        item['title'],
+                                                      ),
+                                                    );
+                                                  },
+                                                  child: Text('แก้ไข'),
+                                                ),
+                                                FlatButton(
+                                                  onPressed: () {},
+                                                  child: Text('ยกเลิก'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      }
                                     } else {
                                       showDialog(
                                         context: context,

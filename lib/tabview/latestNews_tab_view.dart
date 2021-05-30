@@ -131,54 +131,74 @@ class _LatestNewsTabViewState extends State<LatestNewsTabView> {
                                 icon: Icon(Icons.more_horiz),
                                 onPressed: () {
                                   final auth = FirebaseAuth.instance;
-                                  if (auth.currentUser != null &&
-                                      auth.currentUser.uid == item['user_id']) {
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          content: Text('ตั้งค่า'),
-                                          actions: [
-                                            FlatButton(
-                                              onPressed: () async {
-                                                await FirebaseFirestore.instance
-                                                    .collection("News")
-                                                    .doc(item.id)
-                                                    .delete();
 
-                                                Navigator.pop(context);
-                                              },
-                                              child: Text('ลบออก'),
-                                            ),
-                                            FlatButton(
-                                              onPressed: () {
-                                                Navigator.pushNamed(
-                                                  context,
-                                                  EditNews.routeName,
-                                                  arguments: NewsEditParams(
-                                                      item.id,
-                                                      item['title'],
-                                                      item['detail']),
-                                                );
-                                              },
-                                              child: Text('แก้ไข'),
-                                            ),
-                                            FlatButton(
-                                              onPressed: () {
-                                                // Navigator.push(
-                                                //   context,
-                                                //   MaterialPageRoute(
-                                                //     builder: (context) =>
-                                                //         Login(),
-                                                //   ),
-                                                // );
-                                              },
-                                              child: Text('ยกเลิก'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
+                                  try {
+                                    print('เช็ค login ใช้ได้ : ');
+                                    print(auth.currentUser.uid);
+
+                                    print("item['user_id'] : ");
+                                    print(item['user_id']);
+                                    print(auth.currentUser.uid);
+
+                                    print("item['detail'] : ");
+                                    print(item['detail']);
+                                  } on Exception catch (exception) {
+                                    // only executed if error is of type Exception
+                                  } catch (error) {
+                                    // executed for errors of all types other than Exception
+                                  }
+
+                                  if (auth.currentUser != null) {
+                                    if (auth.currentUser.uid ==
+                                        item['user_id']) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            content: Text('ตั้งค่า'),
+                                            actions: [
+                                              FlatButton(
+                                                onPressed: () async {
+                                                  await FirebaseFirestore
+                                                      .instance
+                                                      .collection("News")
+                                                      .doc(item.id)
+                                                      .delete();
+
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text('ลบออก'),
+                                              ),
+                                              FlatButton(
+                                                onPressed: () {
+                                                  Navigator.pushNamed(
+                                                    context,
+                                                    EditNews.routeName,
+                                                    arguments: NewsEditParams(
+                                                        item.id,
+                                                        item['title'],
+                                                        item['detail']),
+                                                  );
+                                                },
+                                                child: Text('แก้ไข'),
+                                              ),
+                                              FlatButton(
+                                                onPressed: () {
+                                                  // Navigator.push(
+                                                  //   context,
+                                                  //   MaterialPageRoute(
+                                                  //     builder: (context) =>
+                                                  //         Login(),
+                                                  //   ),
+                                                  // );
+                                                },
+                                                child: Text('ยกเลิก'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }
                                     // Navigator.push(
                                     //   context,
                                     //   MaterialPageRoute(

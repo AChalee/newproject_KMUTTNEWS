@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:New_Project_KMUTTNEWS/component/show_notification.dart';
 import 'package:New_Project_KMUTTNEWS/constants.dart';
+import 'package:New_Project_KMUTTNEWS/service/add_activities_service.dart';
 import 'package:New_Project_KMUTTNEWS/service/add_news_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -96,13 +97,18 @@ class _AddActivitiesState extends State<AddActivities> {
                           style: kTitleCard,
                         ),
                         onPressed: () {
+                          var snapshot = _storage
+                              .ref()
+                              .child('ActPhoto/imageName')
+                              .putFile(file)
+                              .onComplete;
                           if (acttitle.text == "" || actdetail.text == '') {
                             showMessageBox(context, "error",
                                 "กรุณากรอกรายละเอียดก่อนโพสต์",
                                 actions: [dismissButton(context)]);
                             logger.e("newstitle or newsdetail can not be null");
                           } else {
-                            addNewsItem(
+                            addActItem(
                               context,
                               {
                                 "picture": imageUrl,
