@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:New_Project_KMUTTNEWS/component/show_notification.dart';
@@ -147,6 +148,7 @@ class _AddNewsState extends State<AddNews> {
       setState(() {
         file = File(image.path);
       });
+      print(file);
 
       //if (image != null) {
       //Upload to Firebase

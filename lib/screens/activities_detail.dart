@@ -1,4 +1,5 @@
-import 'package:New_Project_KMUTTNEWS/service/add_news_service.dart';
+//import 'package:New_Project_KMUTTNEWS/service/add_news_service.dart';
+import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
 import 'package:New_Project_KMUTTNEWS/widget/circle_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class _ActivitiesDatailState extends State<ActivitiesDatail> {
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
-            .collection("Activitites")
+            .collection("Activities")
             .doc(params.id)
             .snapshots(),
         builder: (context, snapshot) {

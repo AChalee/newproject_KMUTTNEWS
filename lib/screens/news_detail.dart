@@ -51,10 +51,6 @@ class _NewsDetailState extends State<NewsDetail> {
           ),
         ),
       ),
-
-      // appBar: AppBar(
-      //   title: Text(params.title),
-      // ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection("News")
