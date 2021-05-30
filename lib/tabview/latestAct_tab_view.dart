@@ -1,7 +1,12 @@
 import 'package:New_Project_KMUTTNEWS/screens/activities_detail.dart';
+import 'package:New_Project_KMUTTNEWS/screens/login_view.dart';
 //import 'package:New_Project_KMUTTNEWS/screens/activities_view.dart';
 import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
+import 'package:New_Project_KMUTTNEWS/tabview/edit_activities.dart';
+import 'package:New_Project_KMUTTNEWS/tabview/edit_news.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
@@ -91,30 +96,106 @@ class _LatestActTabViewState extends State<LatestActTabView> {
                                   width: 12.0,
                                 ),
                                 Expanded(
-                                    child: Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 5.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        item['title'],
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 2,
-                                        style: kTitleCard,
-                                      ),
-                                      SizedBox(
-                                        height: 4.0,
-                                      ),
-                                      Text(
-                                        item['detail'],
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 2,
-                                        style: kDetailContent,
-                                      ),
-                                    ],
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 5.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          item['title'],
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                          style: kTitleCard,
+                                        ),
+                                        SizedBox(
+                                          height: 4.0,
+                                        ),
+                                        Text(
+                                          item['detail'],
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                          style: kDetailContent,
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ))
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.more_horiz),
+                                  onPressed: () {
+                                    final auth = FirebaseAuth.instance;
+                                    if (auth.currentUser != null &&
+                                        auth.currentUser.uid ==
+                                            item['user_id']) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            content: Text('ตั้งค่า'),
+                                            actions: [
+                                              FlatButton(
+                                                onPressed: () async {
+                                                  await FirebaseFirestore
+                                                      .instance
+                                                      .collection("Activities")
+                                                      .doc(item.id)
+                                                      .delete();
+
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text('ลบออก'),
+                                              ),
+                                              FlatButton(
+                                                onPressed: () {
+                                                  Navigator.pushNamed(
+                                                    context,
+                                                    EditNews.routeName,
+                                                    arguments:
+                                                        ActivitiesEditParams(
+                                                      item.id,
+                                                      item['detail'],
+                                                      item['title'],
+                                                    ),
+                                                  );
+                                                },
+                                                child: Text('แก้ไข'),
+                                              ),
+                                              FlatButton(
+                                                onPressed: () {},
+                                                child: Text('ยกเลิก'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            content: Text('กรุณาเข้าสู่ระบบ'),
+                                            actions: [
+                                              FlatButton(
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Login(),
+                                                    ),
+                                                  );
+                                                },
+                                                child: Text('Login'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }
+                                  },
+                                ),
                               ],
                             ),
                           ),

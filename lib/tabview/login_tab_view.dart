@@ -6,11 +6,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:New_Project_KMUTTNEWS/screens/news_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-//import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-
-//import 'package:New_Project_KMUTTNEWS/provider/firebase_auth.dart';
-
-//import 'package:New_Project_KMUTTNEWS/tabview/register_tab_view.dart';
 
 class LoginTabView extends StatelessWidget {
   final formKey = GlobalKey<FormState>();

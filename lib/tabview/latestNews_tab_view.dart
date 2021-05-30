@@ -50,29 +50,6 @@ class _LatestNewsTabViewState extends State<LatestNewsTabView> {
                 itemCount: snapshot.data.documents.length,
                 itemBuilder: (context, index) {
                   final DocumentSnapshot item = snapshot.data.documents[index];
-                  // return Card(
-                  //   child: ListTile(
-                  //     onTap: () async {
-                  //       await FirebaseFirestore.instance
-                  //           .collection("News")
-                  //           .doc(item.id)
-                  //           .update(
-                  //         {'view_count': item['view_count'] + 1},
-                  //       );
-
-                  //       await Navigator.pushNamed(
-                  //         context,
-                  //         NewsDetail.routeName,
-                  //         arguments: NewsDetailParams(
-                  //           item.id,
-                  //           item['title'],
-                  //         ),
-                  //       );
-                  //     },
-                  //     title: Text(item['title']),
-                  //     subtitle: Text(item['detail']),
-                  //   ),
-                  // );
 
                   return InkWell(
                     onTap: () async {
@@ -83,10 +60,7 @@ class _LatestNewsTabViewState extends State<LatestNewsTabView> {
                           .update(
                         {'view_count': item['view_count'] + 1},
                       );
-                      // FirebaseFirestore.instance
-                      //     .doc('News/${item['view_count'] + 1}');
-                      // await item.reference
-                      //     .update({'view_count': item['view_count'] + 1});
+
                       await Navigator.pushNamed(
                         context,
                         NewsDetail.routeName,
@@ -154,7 +128,7 @@ class _LatestNewsTabViewState extends State<LatestNewsTabView> {
                               ),
                             ),
                             IconButton(
-                                icon: Icon(Icons.more_vert),
+                                icon: Icon(Icons.more_horiz),
                                 onPressed: () {
                                   final auth = FirebaseAuth.instance;
                                   if (auth.currentUser != null &&

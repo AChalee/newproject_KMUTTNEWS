@@ -2,6 +2,7 @@ import 'package:New_Project_KMUTTNEWS/launcher.dart';
 import 'package:New_Project_KMUTTNEWS/screens/activities_detail.dart';
 //import 'package:New_Project_KMUTTNEWS/screens/activities_view.dart';
 import 'package:New_Project_KMUTTNEWS/screens/news_detail.dart';
+import 'package:New_Project_KMUTTNEWS/tabview/edit_activities.dart';
 import 'package:New_Project_KMUTTNEWS/tabview/edit_news.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         NewsDetail.routeName: (context) => NewsDetail(),
         ActivitiesDatail.routeName: (context) => ActivitiesDatail(),
         EditNews.routeName: (context) => EditNews(),
+        EditActivities.routeName: (context) => EditActivities(),
       },
     );
   }

@@ -2,7 +2,7 @@ import 'package:New_Project_KMUTTNEWS/constants.dart';
 import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
 import 'package:New_Project_KMUTTNEWS/widget/circle_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
+//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class NewsDetail extends StatefulWidget {
@@ -22,32 +22,33 @@ class _NewsDetailState extends State<NewsDetail> {
         preferredSize: Size.fromHeight(65.0),
         child: Center(
           child: SafeArea(
-              child: Padding(
-            padding: EdgeInsets.fromLTRB(18.0, 15.0, 18.0, 0),
-            child: Row(
-              children: [
-                CircleButton(
-                  icon: Icons.arrow_back_ios,
-                  onTap: () => Navigator.pop(context),
-                ),
-                Spacer(),
-                CircleButton(
-                  icon: Icons.share,
-                  onTap: () {},
-                ),
-                CircleButton(
-                  icon: Icons.favorite_border,
-                  onTap: () {},
-                ),
-                // StreamBuilder(
-                //   stream: FirebaseFirestore.instance.collection(''),
-                //   builder: (context, snapshot) {
-                //     return Container();
-                //   },
-                // )
-              ],
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(18.0, 15.0, 18.0, 0),
+              child: Row(
+                children: [
+                  CircleButton(
+                    icon: Icons.arrow_back_ios,
+                    onTap: () => Navigator.pop(context),
+                  ),
+                  Spacer(),
+                  CircleButton(
+                    icon: Icons.share,
+                    onTap: () {},
+                  ),
+                  CircleButton(
+                    icon: Icons.favorite_border,
+                    onTap: () {},
+                  ),
+                  // StreamBuilder(
+                  //   stream: FirebaseFirestore.instance.collection(''),
+                  //   builder: (context, snapshot) {
+                  //     return Container();
+                  //   },
+                  // )
+                ],
+              ),
             ),
-          )),
+          ),
         ),
       ),
 
@@ -74,29 +75,11 @@ class _NewsDetailState extends State<NewsDetail> {
             final item = snapshot.data;
             return Container(
               padding: EdgeInsets.symmetric(horizontal: 18.0),
-              // child: Column(
-              //   children: [
-              //     Text(item['detail']),
-              //     TextFormField(initialValue: item['detail'])
-              //   ],
-              // ),
               child: ListView(
                 children: [
                   SizedBox(
                     height: 12.0,
                   ),
-                  // Hero(
-                  //   tag: null,
-                  //   child: Container(
-                  //     height: 220.0,
-                  //     decoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(15.0),
-                  //       image: DecorationImage(
-                  //           image: NetworkImage(item['picture']),
-                  //           fit: BoxFit.fill),
-                  //     ),
-                  //   ),
-                  // ),
                   Container(
                     height: 220.0,
                     decoration: BoxDecoration(

@@ -4,14 +4,14 @@ import 'package:New_Project_KMUTTNEWS/component/show_notification.dart';
 import 'package:New_Project_KMUTTNEWS/constants.dart';
 //import 'package:New_Project_KMUTTNEWS/screens/news_detail.dart';
 import 'package:New_Project_KMUTTNEWS/service/add_news_service.dart';
-import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
+//import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
-import 'package:image_cropper/image_cropper.dart';
+//import 'package:image_cropper/image_cropper.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class AddNews extends StatefulWidget {
@@ -25,20 +25,11 @@ class _AddNewsState extends State<AddNews> {
   final newstitle = TextEditingController();
   final newsdetail = TextEditingController();
   Logger logger = Logger();
-  // final picker = ImagePicker();
-  // File _image;
   String imageUrl;
-
-  // Future getImage() async {
-  //   final pickedFile = await picker.getImage(source: ImageSource.gallery);
-  //   setState(() {
-  //     if (pickedFile != null) {
-  //       _image = pickedFile.path as File;
-  //     } else {
-  //       print('No image selected.');
-  //     }
-  //   });
-  // }
+  final _storage = FirebaseStorage.instance;
+  final _picker = ImagePicker();
+  PickedFile image;
+  File file;
 
   @override
   Widget build(BuildContext context) {
@@ -56,27 +47,46 @@ class _AddNewsState extends State<AddNews> {
         child: Center(
           child: Column(
             children: <Widget>[
+              file != null
+                  ? Container(
+                      child: Image.file(file),
+                      height: 200,
+                      width: 500,
+                    )
+                  : Placeholder(
+                      fallbackHeight: 200.0,
+                      fallbackWidth: double.infinity,
+                    ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Card(
+                    shadowColor: kGrey3,
+                    child: IconButton(
+                      icon: Icon(Icons.add_a_photo),
+                      onPressed: () {
+                        //getImage();
+                        uploadImage();
+                      },
+                    ),
+                  ),
+                  Card(
+                    shadowColor: kGrey3,
+                    child: IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          //getImage();
+                          setState(() {
+                            file = null;
+                          });
+                        }),
+                  ),
+                ],
+              ),
               Container(
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   children: <Widget>[
-                    Card(
-                      shadowColor: kGrey3,
-                      child: IconButton(
-                          icon: Icon(Icons.add_a_photo),
-                          onPressed: () {
-                            //getImage();
-                            uploadImage();
-                          }),
-                    ),
-                    // InkWell(
-
-                    //   child: IconButton(
-                    //       icon: Icon(Icons.add_a_photo),
-                    //       onPressed: () {
-                    //         getImage();
-                    //       }),
-                    // ),
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: "หัวข้อข่าว",
@@ -88,17 +98,6 @@ class _AddNewsState extends State<AddNews> {
                       decoration: InputDecoration(labelText: "รายละเอียด"),
                       controller: newsdetail,
                     ),
-                    // Container(
-                    //   height: 100,
-                    //   width: 100,
-                    //   color: Colors.black,
-                    //   child: RaisedButton(
-                    //     onPressed: () {
-                    //       getImage();
-                    //     },
-                    //   ),
-                    // ),
-                    // Padding(padding: const EdgeInsets.all(10)),
                     RaisedButton(
                         child: Text(
                           "โพสต์",
@@ -136,10 +135,6 @@ class _AddNewsState extends State<AddNews> {
   }
 
   uploadImage() async {
-    final _storage = FirebaseStorage.instance;
-    final _picker = ImagePicker();
-    PickedFile image;
-    //Check Permission
     await Permission.photos.request();
 
     var permissionStatus = await Permission.photos.status;
@@ -148,26 +143,24 @@ class _AddNewsState extends State<AddNews> {
       //Select Image
 
       image = await _picker.getImage(source: ImageSource.gallery);
-      var file = File(image.path);
+      // var file = File(image.path);
+      setState(() {
+        file = File(image.path);
+      });
 
-      if (image != null) {
-        //Upload to Firebase
-        var snapshot = await _storage
-            .ref()
-            .child('NewsPhoto/imageName')
-            .putFile(file)
-            .onComplete;
+      //if (image != null) {
+      //Upload to Firebase
+      var snapshot = await _storage
+          .ref()
+          .child('NewsPhoto/imageName')
+          .putFile(file)
+          .onComplete;
 
-        var dowloadUrl = await snapshot.ref.getDownloadURL();
+      var dowloadUrl = await snapshot.ref.getDownloadURL();
 
-        setState(() {
-          imageUrl = dowloadUrl;
-        });
-      } else {
-        print('No Path Received');
-      }
-    } else {
-      print('Grant Permissions and try again');
+      setState(() {
+        imageUrl = dowloadUrl;
+      });
     }
   }
 }
