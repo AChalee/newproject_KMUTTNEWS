@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:New_Project_KMUTTNEWS/component/show_notification.dart';
 import 'package:New_Project_KMUTTNEWS/constants.dart';
 import 'package:New_Project_KMUTTNEWS/service/add_activities_service.dart';
-import 'package:New_Project_KMUTTNEWS/service/add_news_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -20,10 +19,12 @@ class AddActivities extends StatefulWidget {
 class _AddActivitiesState extends State<AddActivities> {
   final acttitle = TextEditingController();
   final actdetail = TextEditingController();
+
   Logger logger = Logger();
-  String imageUrl;
+  String imageUrl, title;
   final _storage = FirebaseStorage.instance;
-  var _picker = ImagePicker();
+  final database = Firestore.instance;
+  final _picker = ImagePicker();
   PickedFile image;
   File file;
 
@@ -31,9 +32,37 @@ class _AddActivitiesState extends State<AddActivities> {
   Widget build(BuildContext context) {
     DateTime datenow = DateTime.now();
     Timestamp dateTimeStamp = Timestamp.fromDate(datenow);
+
+    searchData(String title) async {
+      List<String> splitList = title.split(' ');
+      List<String> indexList = [];
+      for (int i = 0; i < splitList.length; i++,) {
+        for (int j = 0; j < splitList[i].length; j++) {
+          indexList.add(splitList[i].substring(0, j + 1).toLowerCase());
+        }
+      }
+      database.collection('Activities').add({
+        "picture": imageUrl,
+        "create_at": dateTimeStamp,
+        "title": acttitle.text,
+        "detail": actdetail.text,
+        "view_count": 0,
+        "user_id": FirebaseAuth.instance.currentUser.uid,
+        "searchKeywords": indexList,
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('กิจกรรมวันนี้'),
+        title: Text(
+          'กิจกรรมวันนี้',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontFamily: 'Itim',
+          ),
+        ),
+        backgroundColor: Colors.orange[700],
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -48,9 +77,6 @@ class _AddActivitiesState extends State<AddActivities> {
                       fallbackHeight: 200.0,
                       fallbackWidth: double.infinity,
                     ),
-              // : Container(
-              //     child: Text('T'),
-              //   ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -81,20 +107,44 @@ class _AddActivitiesState extends State<AddActivities> {
                 child: Column(
                   children: <Widget>[
                     TextFormField(
+                      style: TextStyle(fontSize: 10, fontFamily: 'Itim'),
                       decoration: InputDecoration(
                         labelText: "หัวข้อข่าว",
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontFamily: 'Itim',
+                        ),
                       ),
                       controller: acttitle,
                     ),
                     Padding(padding: const EdgeInsets.all(10)),
                     TextFormField(
-                      decoration: InputDecoration(labelText: "รายละเอียด"),
+                      style: TextStyle(fontSize: 10, fontFamily: 'Itim'),
+                      decoration: InputDecoration(
+                        labelText: "รายละเอียด",
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontFamily: 'Itim',
+                        ),
+                      ),
                       controller: actdetail,
                     ),
+                    SizedBox(height: 20.0),
                     RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50)),
+                        color: Colors.orange[500],
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 50, vertical: 10),
                         child: Text(
                           "โพสต์",
-                          style: kTitleCard,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontFamily: 'Itim',
+                              fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
                           var snapshot = _storage
@@ -108,18 +158,7 @@ class _AddActivitiesState extends State<AddActivities> {
                                 actions: [dismissButton(context)]);
                             logger.e("newstitle or newsdetail can not be null");
                           } else {
-                            addActItem(
-                              context,
-                              {
-                                "picture": imageUrl,
-                                "create_at": dateTimeStamp,
-                                "title": acttitle.text,
-                                "detail": actdetail.text,
-                                "view_count": 0,
-                                "user_id":
-                                    FirebaseAuth.instance.currentUser.uid,
-                              },
-                            );
+                            searchData(acttitle.text);
                           }
                         })
                   ],
@@ -159,11 +198,6 @@ class _AddActivitiesState extends State<AddActivities> {
       setState(() {
         imageUrl = dowloadUrl;
       });
-      // } else {
-      //   print('No Path Received');
-      // }
-      // } else {
-      //   print('Grant Permissions and try again');
     }
   }
 }

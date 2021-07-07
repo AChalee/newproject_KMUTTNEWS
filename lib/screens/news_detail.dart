@@ -2,6 +2,9 @@ import 'package:New_Project_KMUTTNEWS/constants.dart';
 import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
 import 'package:New_Project_KMUTTNEWS/widget/circle_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -37,14 +40,19 @@ class _NewsDetailState extends State<NewsDetail> {
                   ),
                   CircleButton(
                     icon: Icons.favorite_border,
-                    onTap: () {},
+                    onTap: () async {
+                      if (FirebaseAuth.instance.currentUser != null) {
+                        print("มีอะไรออกมาไหม ?");
+                        print(params.id);
+                        await FirebaseFirestore.instance
+                            .collection('News')
+                            .doc(params.id)
+                            .update({
+                          'bookmark': [FirebaseAuth.instance.currentUser.uid],
+                        });
+                      }
+                    },
                   ),
-                  // StreamBuilder(
-                  //   stream: FirebaseFirestore.instance.collection(''),
-                  //   builder: (context, snapshot) {
-                  //     return Container();
-                  //   },
-                  // )
                 ],
               ),
             ),

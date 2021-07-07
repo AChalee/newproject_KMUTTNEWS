@@ -22,12 +22,21 @@ class AddNews extends StatefulWidget {
   _AddNewsState createState() => _AddNewsState();
 }
 
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+}
+
 class _AddNewsState extends State<AddNews> {
   final newstitle = TextEditingController();
   final newsdetail = TextEditingController();
+
+  // final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();  //เป็นตัวกลางที่สั่งให้มันเด้ง noti ขึ้นมา
+  // const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings();
+
   Logger logger = Logger();
-  String imageUrl;
+  String imageUrl, title;
   final _storage = FirebaseStorage.instance;
+  final database = Firestore.instance;
   final _picker = ImagePicker();
   PickedFile image;
   File file;
@@ -36,11 +45,35 @@ class _AddNewsState extends State<AddNews> {
   Widget build(BuildContext context) {
     DateTime dateNow = DateTime.now();
     Timestamp dateTimeStamp = Timestamp.fromDate(dateNow);
+
+    searchData(String title) async {
+      List<String> splitList = title.split(' ');
+      List<String> indexList = [];
+      for (int i = 0; i < splitList.length; i++,) {
+        for (int j = 0; j < splitList[i].length; j++) {
+          indexList.add(splitList[i].substring(0, j + 1).toLowerCase());
+        }
+      }
+      database.collection('News').add({
+        "picture": imageUrl,
+        "create_at": dateTimeStamp,
+        "title": newstitle.text,
+        "detail": newsdetail.text,
+        "view_count": 0,
+        "user_id": FirebaseAuth.instance.currentUser.uid,
+        "searchKeywords": indexList,
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'ข่าวสารวันนี้',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontFamily: 'Itim',
+          ),
         ),
         backgroundColor: Colors.orange[700],
       ),
@@ -66,7 +99,6 @@ class _AddNewsState extends State<AddNews> {
                     child: IconButton(
                       icon: Icon(Icons.add_a_photo),
                       onPressed: () {
-                        //getImage();
                         uploadImage();
                       },
                     ),
@@ -76,7 +108,6 @@ class _AddNewsState extends State<AddNews> {
                     child: IconButton(
                         icon: Icon(Icons.delete),
                         onPressed: () {
-                          //getImage();
                           setState(() {
                             file = null;
                           });
@@ -89,47 +120,61 @@ class _AddNewsState extends State<AddNews> {
                 child: Column(
                   children: <Widget>[
                     TextFormField(
+                      style: TextStyle(fontSize: 10, fontFamily: 'Itim'),
                       decoration: InputDecoration(
                         labelText: "หัวข้อข่าว",
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontFamily: 'Itim',
+                        ),
                       ),
                       controller: newstitle,
                     ),
                     Padding(padding: const EdgeInsets.all(10)),
                     TextFormField(
-                      decoration: InputDecoration(labelText: "รายละเอียด"),
+                      style: TextStyle(fontSize: 10, fontFamily: 'Itim'),
+                      decoration: InputDecoration(
+                        labelText: "รายละเอียด",
+                        labelStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontFamily: 'Itim',
+                        ),
+                      ),
                       controller: newsdetail,
                     ),
+                    SizedBox(height: 20.0),
                     RaisedButton(
-                        child: Text(
-                          "โพสต์",
-                          style: kTitleCard,
-                        ),
-                        onPressed: () {
-                          var snapshot = _storage
-                              .ref()
-                              .child('NewsPhoto/imageName')
-                              .putFile(file)
-                              .onComplete;
-                          if (newstitle.text == "" || newsdetail.text == '') {
-                            showMessageBox(context, "error",
-                                "กรุณากรอกรายละเอียดก่อนโพสต์",
-                                actions: [dismissButton(context)]);
-                            logger.e("newstitle or newsdetail can not be null");
-                          } else {
-                            addNewsItem(
-                              context,
-                              {
-                                "picture": imageUrl,
-                                "create_at": dateTimeStamp,
-                                "title": newstitle.text,
-                                "detail": newsdetail.text,
-                                "view_count": 0,
-                                "user_id":
-                                    FirebaseAuth.instance.currentUser.uid,
-                              },
-                            );
-                          }
-                        })
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
+                      color: Colors.orange[500],
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                      child: Text(
+                        "โพสต์",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontFamily: 'Itim',
+                            fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () {
+                        var snapshot = _storage
+                            .ref()
+                            .child('NewsPhoto/imageName')
+                            .putFile(file)
+                            .onComplete;
+                        if (newstitle.text == "" || newsdetail.text == '') {
+                          showMessageBox(
+                              context, "error", "กรุณากรอกรายละเอียดก่อนโพสต์",
+                              actions: [dismissButton(context)]);
+                          logger.e("newstitle or newsdetail can not be null");
+                        } else {
+                          searchData(newstitle.text);
+                        }
+                      },
+                    )
                   ],
                 ),
               ),
@@ -146,17 +191,11 @@ class _AddNewsState extends State<AddNews> {
     var permissionStatus = await Permission.photos.status;
 
     if (permissionStatus.isGranted) {
-      //Select Image
-
       image = await _picker.getImage(source: ImageSource.gallery);
-      // var file = File(image.path);
       setState(() {
         file = File(image.path);
       });
-      // print(file);
 
-      //if (image != null) {
-      //Upload to Firebase
       var snapshot = await _storage
           .ref()
           .child('NewsPhoto/imageName')

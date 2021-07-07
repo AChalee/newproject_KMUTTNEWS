@@ -1,4 +1,5 @@
 import 'package:New_Project_KMUTTNEWS/screens/profile_user.dart';
+import 'package:New_Project_KMUTTNEWS/tabview/save_post_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 
@@ -33,7 +34,7 @@ class _AddMoreState extends State<AddMore> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(
-            "KMUTT NEWS",
+            "MENU",
             style: TextStyle(
                 fontSize: 24,
                 fontFamily: 'Prompt',
@@ -141,7 +142,7 @@ class _AddMoreState extends State<AddMore> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Login(),
+                        builder: (context) => SavePostTab(),
                       ),
                     );
                   },
@@ -171,7 +172,7 @@ class _AddMoreState extends State<AddMore> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Login(),
+                        builder: (context) => SavePostTab(),
                       ),
                     );
                   },
