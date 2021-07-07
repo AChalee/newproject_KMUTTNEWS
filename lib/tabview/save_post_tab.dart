@@ -55,6 +55,7 @@ class _SavePostTabState extends State<SavePostTab> {
                         arguments: NewsDetailParams(
                           item.id,
                           item['title'],
+                          item['picture']
                         ),
                         // title: Text(item['title']),
                         // subtitle: Text(item['detail']),

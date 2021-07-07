@@ -80,6 +80,7 @@ class _TrendNewsHeaderState extends State<TrendNewsHeader> {
                       arguments: NewsDetailParams(
                         item.id,
                         item['title'],
+                          item['picture']
                       ),
                     );
                   },

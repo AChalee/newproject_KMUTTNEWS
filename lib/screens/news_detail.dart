@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 class NewsDetail extends StatefulWidget {
   static final routeName = "/news/detail";
@@ -36,7 +37,11 @@ class _NewsDetailState extends State<NewsDetail> {
                   Spacer(),
                   CircleButton(
                     icon: Icons.share,
-                    onTap: () {},
+                    onTap: () {
+                      Share.share(params.picture,
+                      subject: params.title
+                      );
+                    },
                   ),
                   CircleButton(
                     icon: Icons.favorite_border,
@@ -137,6 +142,7 @@ class _NewsDetailState extends State<NewsDetail> {
 class NewsDetailParams {
   final String id; //กดมาจากหน้า latestNews
   final String title;
+  final String picture;
 
-  NewsDetailParams(this.id, this.title);
+  NewsDetailParams(this.id, this.title,this.picture);
 }
