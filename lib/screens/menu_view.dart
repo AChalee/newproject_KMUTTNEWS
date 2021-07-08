@@ -1,3 +1,4 @@
+import 'package:New_Project_KMUTTNEWS/screens/bookmark_view.dart';
 import 'package:New_Project_KMUTTNEWS/screens/profile_user.dart';
 import 'package:New_Project_KMUTTNEWS/tabview/save_post_tab.dart';
 import 'package:flutter/material.dart';
@@ -142,7 +143,7 @@ class _AddMoreState extends State<AddMore> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SavePostTab(),
+                        builder: (context) => BookmarkView(),
                       ),
                     );
                   },

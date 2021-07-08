@@ -56,7 +56,7 @@ class LoginTabView extends StatelessWidget {
   Widget emailText() {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
-      style: TextStyle(fontSize: 12, fontFamily: 'Itim'),
+      style: descriptionStyle,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey[200], width: 2),
@@ -89,7 +89,7 @@ class LoginTabView extends StatelessWidget {
   Widget passwordText() {
     return TextFormField(
       obscureText: true, //ปิดบัง password
-      style: TextStyle(fontSize: 12, fontFamily: 'Itim'),
+      style:descriptionStyle,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey[200], width: 2),
@@ -149,11 +149,7 @@ class LoginTabView extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 60, vertical: 10),
       child: Text(
         "LOGIN",
-        style: TextStyle(
-            color: Colors.white,
-            fontSize: 13,
-            fontFamily: 'Itim',
-            fontWeight: FontWeight.bold),
+        style: kDetailContent
       ),
       onPressed: () {
         if (formKey.currentState.validate()) {
@@ -189,11 +185,7 @@ class LoginTabView extends StatelessWidget {
     return OutlineButton.icon(
       label: Text(
         'Sign In With Google',
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 10,
-          fontFamily: 'Itim',
-        ),
+        style: kDetailContent
       ),
       shape: StadiumBorder(),
       padding: EdgeInsets.symmetric(horizontal: 22, vertical: 8),

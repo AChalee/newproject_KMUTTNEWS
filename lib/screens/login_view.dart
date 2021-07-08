@@ -1,3 +1,4 @@
+import 'package:New_Project_KMUTTNEWS/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:New_Project_KMUTTNEWS/tabview/login_tab_view.dart';
@@ -33,10 +34,11 @@ class Login extends StatelessWidget {
                   Text(
                     'KMUTT NEWS',
                     style: TextStyle(
+                        fontSize: 24,
+                        fontFamily: 'Prompt',
                         color: Colors.white,
-                        fontFamily: 'Itim',
-                        fontSize: 28,
                         fontStyle: FontStyle.italic),
+
                   ),
                 ],
               ),
@@ -71,12 +73,10 @@ class Login extends StatelessWidget {
                               tabs: [
                                 Tab(
                                     child: Text('Log in ',
-                                        style: TextStyle(
-                                            fontSize: 15, fontFamily: 'Itim'))),
+                                        style: kTitleCard)),
                                 Tab(
                                     child: Text('Register',
-                                        style: TextStyle(
-                                            fontSize: 15, fontFamily: 'Itim'))),
+                                        style: kTitleCard)),
                               ]),
                         ),
                         Expanded(
