@@ -28,3 +28,5 @@ var kTitleCard = GoogleFonts.roboto(
 
 var descriptionStyle =
     GoogleFonts.roboto(textStyle: TextStyle(fontSize: 15.0, height: 2.0));
+
+

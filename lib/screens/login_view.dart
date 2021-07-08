@@ -1,4 +1,5 @@
 import 'package:New_Project_KMUTTNEWS/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:New_Project_KMUTTNEWS/tabview/login_tab_view.dart';
@@ -37,7 +38,8 @@ class Login extends StatelessWidget {
                         fontSize: 24,
                         fontFamily: 'Prompt',
                         color: Colors.white,
-                        fontStyle: FontStyle.italic),
+                        fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.bold),
 
                   ),
                 ],

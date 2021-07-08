@@ -1,3 +1,4 @@
+import 'package:New_Project_KMUTTNEWS/constants.dart';
 import 'package:flutter/material.dart';
 
 class BookmarkView extends StatefulWidget {
@@ -14,7 +15,7 @@ body:Container(
   width: double.infinity,
   decoration: BoxDecoration(
     gradient: LinearGradient(
-        begin: Alignment.topCenter,
+        begin: Alignment.centerLeft,
     colors: [
       Colors.orange[900],
       Colors.orange[800],
@@ -32,12 +33,56 @@ body:Container(
         children: <Widget>[
           Text('BOOKMARK',
             style: TextStyle(
+                fontSize: 24,
+                fontFamily: 'Prompt',
+                color: Colors.white,
+                fontStyle: FontStyle.italic,
+              fontWeight: FontWeight.bold
 
             ),
-          )
+          ),
 
         ],
-      ),)
+      ),
+      ),
+      SizedBox(height: 1,),
+      Expanded(
+          child:Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(40),
+                topRight: Radius.circular(40),
+              ),
+            ),
+            child: DefaultTabController(
+                 length: 2,
+                 child: Container(
+                   child: Column(
+                     children: <Widget>[
+                       SizedBox(
+                         height: 15,
+                       ),
+                       Container(
+                         constraints: BoxConstraints.expand(height: 50),
+                         child: TabBar(
+                             indicatorWeight: 3,
+                             indicatorColor: Colors.orange,
+                             unselectedLabelColor: Colors.grey,
+                             tabs: [
+                               Tab(
+                                   child: Text('ข่าวสาร ',
+                                       style: kTitleCard)),
+                               Tab(
+                                   child: Text('Register',
+                                       style: kTitleCard)),
+                             ]),
+
+                       ),
+                     ],
+                   ),
+                 ),),
+          ) ),
     ], 
   ),
 ),
