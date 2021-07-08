@@ -2,7 +2,9 @@
 import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
 import 'package:New_Project_KMUTTNEWS/widget/circle_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 import '../constants.dart';
 
@@ -34,11 +36,27 @@ class _ActivitiesDatailState extends State<ActivitiesDatail> {
                   Spacer(),
                   CircleButton(
                     icon: Icons.share,
-                    onTap: () {},
+                    onTap: () {
+                      Share.share(params.picture,
+                          subject: params.title
+                      );
+
+                    },
                   ),
                   CircleButton(
                     icon: Icons.favorite_border,
-                    onTap: () {},
+                    onTap: () async{
+                      if (FirebaseAuth.instance.currentUser != null) {
+                        print("มีอะไรออกมาไหม ?");
+                        print(params.id);
+                        await FirebaseFirestore.instance
+                            .collection('Activities')
+                            .doc(params.id)
+                            .update({
+                          'bookmark': [FirebaseAuth.instance.currentUser.uid],
+                        });
+                      }
+                    },
                   )
                 ],
               ),
@@ -124,6 +142,7 @@ class _ActivitiesDatailState extends State<ActivitiesDatail> {
 class ActivitiesDatailParams {
   final String id;
   final String title;
+  final String picture;
 
-  ActivitiesDatailParams(this.id, this.title);
+  ActivitiesDatailParams(this.id, this.title,this.picture);
 }

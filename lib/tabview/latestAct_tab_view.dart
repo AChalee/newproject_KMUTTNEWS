@@ -61,6 +61,7 @@ class _LatestActTabViewState extends State<LatestActTabView> {
                             arguments: ActivitiesDatailParams(
                               item.id,
                               item['title'],
+                                item['picture']
                             ),
                           );
                         },
