@@ -46,7 +46,7 @@ class _BookmarkActTabState extends State<BookmarkActTab> {
 
                       await Navigator.pushNamed(
                         context,
-                        ActivitiesDatail.routeName,
+                       ActivitiesDatail.routeName,
                         arguments: ActivitiesDatailParams(
                             item.id,
                             item['title'],

@@ -23,7 +23,7 @@ class _SavePostTabState extends State<SavePostTab> {
         child: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection("News")
-          .where("bookmark",arrayContains: FirebaseAuth.instance.currentUser.uid)
+              .where("bookmark",arrayContains: FirebaseAuth.instance.currentUser.uid)
 
               .snapshots(),
           builder: (context, snapshot) {
@@ -53,9 +53,9 @@ class _SavePostTabState extends State<SavePostTab> {
                         context,
                         NewsDetail.routeName,
                         arguments: NewsDetailParams(
-                          item.id,
-                          item['title'],
-                          item['picture']
+                            item.id,
+                            item['title'],
+                            item['picture']
                         ),
                         // title: Text(item['title']),
                         // subtitle: Text(item['detail']),

@@ -141,7 +141,6 @@ class _BookmarkNewsTabState extends State<BookmarkNewsTab> {
          },
        ),
      ),
-
     );
   }
 }
