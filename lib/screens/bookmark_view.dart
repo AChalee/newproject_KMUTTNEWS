@@ -1,4 +1,7 @@
 import 'package:New_Project_KMUTTNEWS/constants.dart';
+import 'package:New_Project_KMUTTNEWS/tabview/bookmark_act_tab.dart';
+import 'package:New_Project_KMUTTNEWS/tabview/bookmark_news_tab.dart';
+import 'package:New_Project_KMUTTNEWS/tabview/save_post_tab.dart';
 import 'package:flutter/material.dart';
 
 class BookmarkView extends StatefulWidget {
@@ -69,16 +72,30 @@ body:Container(
                              indicatorWeight: 3,
                              indicatorColor: Colors.orange,
                              unselectedLabelColor: Colors.grey,
+                             labelColor: Colors.orange,
+
                              tabs: [
                                Tab(
                                    child: Text('ข่าวสาร ',
-                                       style: kTitleCard)),
+                                       style: kTitleCard
+                           ),
+                       ),
                                Tab(
-                                   child: Text('Register',
-                                       style: kTitleCard)),
+                                   child: Text('กิจกรรม',
+                                       style: kTitleCard),
+            ),
                              ]),
 
                        ),
+                       Expanded(
+                           child: Container(
+                             child: TabBarView(
+                                 children: <Widget>[
+
+                                   BookmarkNewsTab(),
+                                   BookmarkActTab(),
+                                 ]),
+                           ),)
                      ],
                    ),
                  ),),
