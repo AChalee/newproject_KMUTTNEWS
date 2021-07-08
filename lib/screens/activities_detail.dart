@@ -47,7 +47,7 @@ class _ActivitiesDatailState extends State<ActivitiesDatail> {
                     icon: Icons.favorite_border,
                     onTap: () async{
                       if (FirebaseAuth.instance.currentUser != null) {
-                        print("มีอะไรออกมาไหม ?");
+                        print("กด Save หน้า Activity ?");
                         print(params.id);
                         await FirebaseFirestore.instance
                             .collection('Activities')
