@@ -55,26 +55,6 @@ class _SearchNewsTabState extends State<SearchNewsTab> {
             itemCount: snapshot.data.documents.length,
             itemBuilder: (context, index) {
               DocumentSnapshot item = snapshot.data.documents[index];
-
-              // return  Card(
-              //   margin: EdgeInsets.symmetric(horizontal: 7, vertical: 7),
-              //
-              //   child: ListTile(
-              //     leading: ConstrainedBox(
-              //       constraints: BoxConstraints(
-              //         minWidth: 44,
-              //         minHeight: 44,
-              //         maxWidth: 64,
-              //         maxHeight: 64, ),
-              //       child: Image.network(data['picture'], fit: BoxFit.cover),),
-              //     title:
-              //     Text(data["title"] ,
-              //       style:  kTitleCard),
-              //     subtitle: Text(data["detail"],
-              //       style:  TextStyle(
-              //         fontSize: 10.0,
-              //         fontFamily: 'Itim',
-              //       ),),),);
             return InkWell(
               onTap: () async{
                 await FirebaseFirestore.instance

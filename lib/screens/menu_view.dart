@@ -172,12 +172,12 @@ class _AddMoreState extends State<AddMore> {
                 margin: EdgeInsets.all(8.0),
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        // builder: (context) => SavePostTab(),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     // builder: (context) => SavePostTab(),
+                    //   ),
+                    // );
                   },
                   splashColor: Colors.orange[500],
                   child: Center(

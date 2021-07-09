@@ -1,3 +1,4 @@
+import 'package:New_Project_KMUTTNEWS/constants.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -33,23 +34,24 @@ class ProfileState extends State<Profile> {
         title: Text(
           "Profile",
           style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontFamily: 'Itim',
+              fontSize: 24,
+              fontFamily: 'Prompt',
+              color: Colors.white,
+              fontStyle: FontStyle.italic
           ),
         ),
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.keyboard,
+              Icons.lock_open,
               color: Colors.white,
             ),
             onPressed: () {
               auth.signOut().then((value) {
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) {
-                  return Login();
-                }));
+                      return Login();
+                    }));
               });
             },
           ),
@@ -99,11 +101,7 @@ class ProfileState extends State<Profile> {
       margin: EdgeInsets.only(right: 200.0),
       child: Text(
         "DisplayName : ",
-        style: TextStyle(
-          fontSize: 10,
-          fontFamily: 'Itim',
-          color: Colors.grey,
-        ),
+        style: descriptionStyle
       ),
     );
   }
@@ -132,11 +130,7 @@ class ProfileState extends State<Profile> {
                     padding: EdgeInsets.fromLTRB(25, 15, 0, 0),
                     child: Text(
                       document["displayName"],
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontFamily: 'Itim',
-                        color: Colors.grey[400],
-                      ),
+                      style: kDetailContent
                     ),
                   );
                 }).toList(),
@@ -152,11 +146,7 @@ class ProfileState extends State<Profile> {
       child: Text(
         "FistName : ",
         //textAlign: TextAlign.right,
-        style: TextStyle(
-          fontSize: 10,
-          fontFamily: 'Itim',
-          color: Colors.grey,
-        ),
+        style: descriptionStyle
       ),
     );
   }
@@ -167,11 +157,7 @@ class ProfileState extends State<Profile> {
       child: Text(
         "LastName : ",
         //textAlign: TextAlign.right,
-        style: TextStyle(
-          fontSize: 10,
-          fontFamily: 'Itim',
-          color: Colors.grey,
-        ),
+        style: descriptionStyle
       ),
     );
   }
@@ -199,11 +185,7 @@ class ProfileState extends State<Profile> {
                     padding: EdgeInsets.fromLTRB(25, 15, 0, 0),
                     child: Text(
                       document["fname"],
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontFamily: 'Itim',
-                        color: Colors.grey[400],
-                      ),
+                      style: kDetailContent
                     ),
                   );
                 }).toList(),
@@ -237,11 +219,7 @@ class ProfileState extends State<Profile> {
                     padding: EdgeInsets.fromLTRB(25, 15, 0, 0),
                     child: Text(
                       document["lname"],
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontFamily: 'Itim',
-                        color: Colors.grey[400],
-                      ),
+                      style: kDetailContent
                     ),
                   );
                 }).toList(),
@@ -257,11 +235,7 @@ class ProfileState extends State<Profile> {
       child: Text(
         "Email : ",
         //textAlign: TextAlign.right,
-        style: TextStyle(
-          fontSize: 10,
-          fontFamily: 'Itim',
-          color: Colors.grey,
-        ),
+        style: descriptionStyle
       ),
     );
   }
@@ -290,11 +264,7 @@ class ProfileState extends State<Profile> {
                     padding: EdgeInsets.fromLTRB(25, 15, 0, 0),
                     child: Text(
                       document["email"],
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontFamily: 'Itim',
-                        color: Colors.grey[400],
-                      ),
+                      style: kDetailContent
                     ),
                   );
                 }).toList(),
@@ -310,22 +280,14 @@ class ProfileState extends State<Profile> {
         Container(
           child: Text(
             "Years : ",
-            style: TextStyle(
-              fontSize: 10,
-              fontFamily: 'Itim',
-              color: Colors.grey,
-            ),
+            style: descriptionStyle
           ),
         ),
         Container(
           margin: EdgeInsets.only(left: 50.0),
           child: Text(
             "Branch : ",
-            style: TextStyle(
-              fontSize: 10,
-              fontFamily: 'Itim',
-              color: Colors.grey,
-            ),
+            style: descriptionStyle
           ),
         ),
       ],
@@ -395,11 +357,7 @@ class ProfileState extends State<Profile> {
                         padding: EdgeInsets.fromLTRB(25, 15, 0, 0),
                         child: Text(
                           document["branch"],
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontFamily: 'Itim',
-                            color: Colors.grey[400],
-                          ),
+                          style: kDetailContent
                         ),
                       );
                     }).toList(),
@@ -417,11 +375,7 @@ class ProfileState extends State<Profile> {
       child: Text(
         "Faculty : ",
         //textAlign: TextAlign.right,
-        style: TextStyle(
-          fontSize: 10,
-          fontFamily: 'Itim',
-          color: Colors.grey,
-        ),
+        style: descriptionStyle
       ),
     );
   }
@@ -450,11 +404,7 @@ class ProfileState extends State<Profile> {
                     padding: EdgeInsets.fromLTRB(25, 15, 0, 0),
                     child: Text(
                       document["faculty"],
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontFamily: 'Itim',
-                        color: Colors.grey[400],
-                      ),
+                      style: kDetailContent
                     ),
                   );
                 }).toList(),
@@ -558,11 +508,7 @@ class ProfileState extends State<Profile> {
       padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
       child: Text(
         "Edit Profile",
-        style: TextStyle(
-            color: Colors.white,
-            fontSize: 13,
-            fontFamily: 'Itim',
-            fontWeight: FontWeight.bold),
+        style: kTitleCard
       ),
       onPressed: () {
         Navigator.push(

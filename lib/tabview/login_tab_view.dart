@@ -149,7 +149,7 @@ class LoginTabView extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 60, vertical: 10),
       child: Text(
         "LOGIN",
-        style: kDetailContent
+        style: kTitleCard
       ),
       onPressed: () {
         if (formKey.currentState.validate()) {

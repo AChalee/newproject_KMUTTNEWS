@@ -1,3 +1,4 @@
+import 'package:New_Project_KMUTTNEWS/constants.dart';
 import 'package:New_Project_KMUTTNEWS/screens/profile_user.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -67,27 +68,13 @@ class EditProfileState extends State<EditProfile> {
         title: Text(
           "Edit-Profile",
           style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontFamily: 'Itim',
+              fontSize: 24,
+              fontFamily: 'Prompt',
+              color: Colors.white,
+              fontStyle: FontStyle.italic
           ),
         ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.keyboard,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              auth.signOut().then((value) {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) {
-                  return Login();
-                }));
-              });
-            },
-          ),
-        ],
+
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -134,11 +121,7 @@ class EditProfileState extends State<EditProfile> {
       child: Text(
         "DisplayName : ",
         //textAlign: TextAlign.right,
-        style: TextStyle(
-          fontSize: 10,
-          fontFamily: 'Itim',
-          color: Colors.grey,
-        ),
+        style: descriptionStyle
       ),
     );
   }
@@ -167,11 +150,7 @@ class EditProfileState extends State<EditProfile> {
                     padding: EdgeInsets.fromLTRB(25, 8, 0, 0),
                     child: Text(
                       document["displayName"],
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontFamily: 'Itim',
-                        color: Colors.grey[400],
-                      ),
+                      style: kDetailContent
                     ),
                   );
                 }).toList(),
@@ -187,11 +166,7 @@ class EditProfileState extends State<EditProfile> {
       child: Text(
         "----------------  Edit Profile  ----------------",
         //textAlign: TextAlign.right,
-        style: TextStyle(
-          fontSize: 10,
-          fontFamily: 'Itim',
-          color: Colors.grey[300],
-        ),
+        style: descriptionStyle
       ),
     );
   }
@@ -201,12 +176,7 @@ class EditProfileState extends State<EditProfile> {
       child: Text(
         "FistName : ",
         //textAlign: TextAlign.right,
-        style: TextStyle(
-          fontSize: 10,
-          fontFamily: 'Itim',
-          color: Colors.grey,
-        ),
-      ),
+        style: descriptionStyle      ),
     );
   }
 
@@ -214,11 +184,7 @@ class EditProfileState extends State<EditProfile> {
     return Container(
       child: Text(
         "LastName : ",
-        style: TextStyle(
-          fontSize: 10,
-          fontFamily: 'Itim',
-          color: Colors.grey,
-        ),
+        style: descriptionStyle
       ),
     );
   }
@@ -251,11 +217,7 @@ class EditProfileState extends State<EditProfile> {
                         padding: EdgeInsets.fromLTRB(25, 10, 0, 0),
                         child: Text(
                           document["fname"],
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontFamily: 'Itim',
-                            color: Colors.grey[400],
-                          ),
+                          style: kDetailContent
                         ),
                       );
                     }).toList(),
@@ -286,11 +248,7 @@ class EditProfileState extends State<EditProfile> {
           return AlertDialog(
             title: Text(
               'FirestName',
-              style: TextStyle(
-                fontSize: 15,
-                fontFamily: 'Itim',
-                color: Colors.grey,
-              ),
+              style: descriptionStyle
             ),
             content: SingleChildScrollView(
               child: ListBody(
@@ -339,11 +297,7 @@ class EditProfileState extends State<EditProfile> {
       padding: EdgeInsets.symmetric(horizontal: 60, vertical: 10),
       child: Text(
         " Save ",
-        style: TextStyle(
-            color: Colors.white,
-            fontSize: 13,
-            fontFamily: 'Itim',
-            fontWeight: FontWeight.bold),
+        style: kTitleCard
       ),
       onPressed: () {
         updateFName();
@@ -365,11 +319,7 @@ class EditProfileState extends State<EditProfile> {
                 return Container(
                   child: Text(
                     document["fname"],
-                    style: TextStyle(
-                      fontSize: 11,
-                      fontFamily: 'Itim',
-                      color: Colors.grey[400],
-                    ),
+                    style: kDetailContent
                   ),
                 );
               }).toList(),
@@ -422,11 +372,7 @@ class EditProfileState extends State<EditProfile> {
                         padding: EdgeInsets.fromLTRB(25, 10, 0, 0),
                         child: Text(
                           document["lname"],
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontFamily: 'Itim',
-                            color: Colors.grey[400],
-                          ),
+                          style: kDetailContent
                         ),
                       );
                     }).toList(),
@@ -457,11 +403,7 @@ class EditProfileState extends State<EditProfile> {
           return AlertDialog(
             title: Text(
               'LastName',
-              style: TextStyle(
-                fontSize: 15,
-                fontFamily: 'Itim',
-                color: Colors.grey,
-              ),
+              style: kDetailContent
             ),
             content: SingleChildScrollView(
               child: ListBody(
@@ -510,11 +452,7 @@ class EditProfileState extends State<EditProfile> {
       padding: EdgeInsets.symmetric(horizontal: 60, vertical: 10),
       child: Text(
         " Save ",
-        style: TextStyle(
-            color: Colors.white,
-            fontSize: 13,
-            fontFamily: 'Itim',
-            fontWeight: FontWeight.bold),
+        style: kDetailContent
       ),
       onPressed: () {
         updateLName();
@@ -541,11 +479,7 @@ class EditProfileState extends State<EditProfile> {
       child: Text(
         "Email : ",
         //textAlign: TextAlign.right,
-        style: TextStyle(
-          fontSize: 10,
-          fontFamily: 'Itim',
-          color: Colors.grey,
-        ),
+        style: descriptionStyle
       ),
     );
   }
@@ -572,11 +506,7 @@ class EditProfileState extends State<EditProfile> {
                     padding: EdgeInsets.fromLTRB(25, 8, 0, 0),
                     child: Text(
                       document["email"],
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontFamily: 'Itim',
-                        color: Colors.grey[400],
-                      ),
+                      style: kDetailContent
                     ),
                   );
                 }).toList(),
@@ -596,22 +526,13 @@ class EditProfileState extends State<EditProfile> {
         Container(
           child: Text(
             "Years : ",
-            style: TextStyle(
-              fontSize: 10,
-              fontFamily: 'Itim',
-              color: Colors.grey,
-            ),
-          ),
+            style: descriptionStyle          ),
         ),
         Container(
           margin: EdgeInsets.only(left: 70.0),
           child: Text(
             "Branch : ",
-            style: TextStyle(
-              fontSize: 10,
-              fontFamily: 'Itim',
-              color: Colors.grey,
-            ),
+            style: descriptionStyle
           ),
         ),
       ],
@@ -646,11 +567,7 @@ class EditProfileState extends State<EditProfile> {
                         padding: EdgeInsets.fromLTRB(15, 12, 0, 0),
                         child: Text(
                           document["years"],
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontFamily: 'Itim',
-                            color: Colors.grey[400],
-                          ),
+                          style: kDetailContent
                         ),
                       );
                     }).toList(),
@@ -693,11 +610,7 @@ class EditProfileState extends State<EditProfile> {
                         padding: EdgeInsets.fromLTRB(15, 12, 0, 0),
                         child: Text(
                           document["branch"],
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontFamily: 'Itim',
-                            color: Colors.grey[400],
-                          ),
+                          style: kDetailContent
                         ),
                       );
                     }).toList(),
@@ -728,11 +641,7 @@ class EditProfileState extends State<EditProfile> {
           return AlertDialog(
             title: Text(
               'Year',
-              style: TextStyle(
-                fontSize: 15,
-                fontFamily: 'Itim',
-                color: Colors.grey,
-              ),
+              style: kDetailContent
             ),
             content: SingleChildScrollView(
               child: ListBody(
@@ -751,11 +660,7 @@ class EditProfileState extends State<EditProfile> {
                             .map((value) => DropdownMenuItem(
                                   child: Text(
                                     value,
-                                    style: TextStyle(
-                                      fontSize: 9,
-                                      fontFamily: 'Itim',
-                                      color: Colors.black,
-                                    ),
+                                    style: kDetailContent
                                   ),
                                   value: value,
                                 ))
@@ -771,10 +676,7 @@ class EditProfileState extends State<EditProfile> {
                         isExpanded: false,
                         hint: Text(
                           'ปี',
-                          style: TextStyle(
-                              fontSize: 10,
-                              fontFamily: 'Itim',
-                              color: Colors.grey[400]),
+                          style: kDetailContent
                         ),
                       ),
                     ),
@@ -795,11 +697,7 @@ class EditProfileState extends State<EditProfile> {
       padding: EdgeInsets.symmetric(horizontal: 60, vertical: 10),
       child: Text(
         " Save ",
-        style: TextStyle(
-            color: Colors.white,
-            fontSize: 13,
-            fontFamily: 'Itim',
-            fontWeight: FontWeight.bold),
+        style: kTitleCard
       ),
       onPressed: () {
         updateYear();
@@ -828,11 +726,7 @@ class EditProfileState extends State<EditProfile> {
           return AlertDialog(
             title: Text(
               'Branch',
-              style: TextStyle(
-                fontSize: 15,
-                fontFamily: 'Itim',
-                color: Colors.grey,
-              ),
+              style: kDetailContent
             ),
             content: SingleChildScrollView(
               child: ListBody(
@@ -851,11 +745,7 @@ class EditProfileState extends State<EditProfile> {
                             .map((value) => DropdownMenuItem(
                                   child: Text(
                                     value,
-                                    style: TextStyle(
-                                      fontSize: 9,
-                                      fontFamily: 'Itim',
-                                      color: Colors.black,
-                                    ),
+                                    style: kDetailContent
                                   ),
                                   value: value,
                                 ))
@@ -871,11 +761,7 @@ class EditProfileState extends State<EditProfile> {
                         isExpanded: false,
                         hint: Text(
                           'สาขาวิชา',
-                          style: TextStyle(
-                              fontSize: 10,
-                              fontFamily: 'Itim',
-                              color: Colors.grey[400]),
-                        ),
+                          style: kDetailContent                        ),
                       ),
                     ),
                   ),
@@ -895,11 +781,7 @@ class EditProfileState extends State<EditProfile> {
       padding: EdgeInsets.symmetric(horizontal: 60, vertical: 10),
       child: Text(
         " Save ",
-        style: TextStyle(
-            color: Colors.white,
-            fontSize: 13,
-            fontFamily: 'Itim',
-            fontWeight: FontWeight.bold),
+        style: kTitleCard
       ),
       onPressed: () {
         updateBranch();
@@ -928,11 +810,7 @@ class EditProfileState extends State<EditProfile> {
       child: Text(
         "Faculty : ",
         //textAlign: TextAlign.right,
-        style: TextStyle(
-          fontSize: 10,
-          fontFamily: 'Itim',
-          color: Colors.grey,
-        ),
+        style: descriptionStyle
       ),
     );
   }
@@ -966,11 +844,7 @@ class EditProfileState extends State<EditProfile> {
                         padding: EdgeInsets.fromLTRB(25, 12, 0, 0),
                         child: Text(
                           document["faculty"],
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontFamily: 'Itim',
-                            color: Colors.grey[400],
-                          ),
+                          style: kDetailContent
                         ),
                       );
                     }).toList(),
@@ -1001,11 +875,7 @@ class EditProfileState extends State<EditProfile> {
           return AlertDialog(
             title: Text(
               'Faculty',
-              style: TextStyle(
-                fontSize: 15,
-                fontFamily: 'Itim',
-                color: Colors.grey,
-              ),
+              style: kDetailContent
             ),
             content: SingleChildScrollView(
               child: ListBody(
@@ -1024,11 +894,7 @@ class EditProfileState extends State<EditProfile> {
                             .map((value) => DropdownMenuItem(
                                   child: Text(
                                     value,
-                                    style: TextStyle(
-                                      fontSize: 9,
-                                      fontFamily: 'Itim',
-                                      color: Colors.black,
-                                    ),
+                                    style: kDetailContent
                                   ),
                                   value: value,
                                 ))
@@ -1044,10 +910,7 @@ class EditProfileState extends State<EditProfile> {
                         isExpanded: false,
                         hint: Text(
                           'คณะ',
-                          style: TextStyle(
-                              fontSize: 10,
-                              fontFamily: 'Itim',
-                              color: Colors.grey[400]),
+                          style: kDetailContent
                         ),
                       ),
                     ),
@@ -1068,11 +931,7 @@ class EditProfileState extends State<EditProfile> {
       padding: EdgeInsets.symmetric(horizontal: 60, vertical: 10),
       child: Text(
         " Save ",
-        style: TextStyle(
-            color: Colors.white,
-            fontSize: 13,
-            fontFamily: 'Itim',
-            fontWeight: FontWeight.bold),
+        style: kTitleCard
       ),
       onPressed: () {
         updateFaculty();
@@ -1128,11 +987,7 @@ class EditProfileState extends State<EditProfile> {
           return AlertDialog(
             title: Text(
               'Choose Profile photo',
-              style: TextStyle(
-                fontSize: 15,
-                fontFamily: 'Itim',
-                color: Colors.grey,
-              ),
+              style: kDetailContent
             ),
             content: SingleChildScrollView(
               child: ListBody(
@@ -1140,11 +995,7 @@ class EditProfileState extends State<EditProfile> {
                   GestureDetector(
                     child: Text(
                       'Camera',
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontFamily: 'Itim',
-                        color: Colors.grey,
-                      ),
+                      style: kDetailContent
                     ),
                     onTap: () {
                       _openCamera(ImageSource.camera);
@@ -1154,11 +1005,7 @@ class EditProfileState extends State<EditProfile> {
                   GestureDetector(
                     child: Text(
                       'Gallery',
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontFamily: 'Itim',
-                        color: Colors.grey,
-                      ),
+                      style: kDetailContent
                     ),
                     onTap: () {
                       _openGallary(context);
@@ -1213,11 +1060,7 @@ class EditProfileState extends State<EditProfile> {
       padding: EdgeInsets.symmetric(horizontal: 60, vertical: 10),
       child: Text(
         " Save ",
-        style: TextStyle(
-            color: Colors.white,
-            fontSize: 13,
-            fontFamily: 'Itim',
-            fontWeight: FontWeight.bold),
+        style: kTitleCard
       ),
       onPressed: () {
         print("เข้า firebase ไหมน้าาา");

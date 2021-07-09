@@ -1,7 +1,7 @@
 import 'package:New_Project_KMUTTNEWS/screens/activities_view.dart';
 import 'package:New_Project_KMUTTNEWS/screens/menu_view.dart';
 import 'package:New_Project_KMUTTNEWS/screens/news_view.dart';
-import 'package:firebase_core/firebase_core.dart';
+//import 'package:firebase_core/firebase_core.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
@@ -16,7 +16,7 @@ class Launcher extends StatefulWidget {
 }
 
 class _LauncherState extends State<Launcher> {
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  //final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   int _selectedIndex = 0;
   List<Widget> _pageWidget = <Widget>[News(), Activities(), AddMore()];
