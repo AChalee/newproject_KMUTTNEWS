@@ -2,6 +2,7 @@ import 'package:New_Project_KMUTTNEWS/constants.dart';
 import 'package:New_Project_KMUTTNEWS/tabview/latestAct_tab_view.dart';
 //import 'package:New_Project_KMUTTNEWS/tabview/login_tab_view.dart';
 import 'package:New_Project_KMUTTNEWS/tabview/post_activity_tab.dart';
+import 'package:New_Project_KMUTTNEWS/tabview/search_act_tab.dart';
 
 import 'package:New_Project_KMUTTNEWS/tabview/trend_activities_header.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,20 +33,18 @@ class _ActivitiesState extends State<Activities> {
               fontStyle: FontStyle.italic),
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.notifications,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          ),
+
           IconButton(
             tooltip: 'Search',
             icon: const Icon(
               Icons.search,
               color: Colors.white,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context, MaterialPageRoute(
+                  builder: (context)=>SearchActTab()),);
+            },
           ),
         ],
       ),

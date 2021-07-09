@@ -1,5 +1,6 @@
 import 'package:New_Project_KMUTTNEWS/tabview/latestNews_tab_view.dart';
 import 'package:New_Project_KMUTTNEWS/tabview/post_news_tab.dart';
+import 'package:New_Project_KMUTTNEWS/tabview/search_news.dart';
 import 'package:New_Project_KMUTTNEWS/tabview/trend_news_header.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,18 +33,18 @@ class _NewsState extends State<News> {
               fontStyle: FontStyle.italic),
         ),
         actions: <Widget>[
-          IconButton(
-              icon: Icon(
-                Icons.notifications,
-                color: Colors.white,
-              ),
-              onPressed: null),
+
           IconButton(
               icon: Icon(
                 Icons.search,
                 color: Colors.white,
               ),
-              onPressed: null)
+              onPressed:
+              (){
+                Navigator.push(
+                    context, MaterialPageRoute(
+                    builder: (context)=>SearchNewsTab()),);
+              })
         ],
       ),
       //-----------------------------------------------------Tabbar View-------------------------------------------------------------
