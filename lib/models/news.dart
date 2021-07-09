@@ -1,4 +1,4 @@
-import 'package:flutter/src/widgets/framework.dart';
+//import 'package:flutter/src/widgets/framework.dart';
 
 class News {
   final String title;
@@ -24,7 +24,7 @@ class News {
       this.image,
       this.category});
 
-  static of(BuildContext context) {}
+
 }
 
 List<News> latestList = [

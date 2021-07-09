@@ -57,9 +57,10 @@ class _AddActivitiesState extends State<AddActivities> {
         title: Text(
           'กิจกรรมวันนี้',
           style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontFamily: 'Itim',
+              fontSize: 24,
+              fontFamily: 'Prompt',
+              color: Colors.white,
+              fontStyle: FontStyle.italic
           ),
         ),
         backgroundColor: Colors.orange[700],
@@ -107,27 +108,19 @@ class _AddActivitiesState extends State<AddActivities> {
                 child: Column(
                   children: <Widget>[
                     TextFormField(
-                      style: TextStyle(fontSize: 10, fontFamily: 'Itim'),
+                      style: descriptionStyle,
                       decoration: InputDecoration(
                         labelText: "หัวข้อข่าว",
-                        labelStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontFamily: 'Itim',
-                        ),
+                        labelStyle: descriptionStyle
                       ),
                       controller: acttitle,
                     ),
                     Padding(padding: const EdgeInsets.all(10)),
                     TextFormField(
-                      style: TextStyle(fontSize: 10, fontFamily: 'Itim'),
+                      style: descriptionStyle,
                       decoration: InputDecoration(
                         labelText: "รายละเอียด",
-                        labelStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontFamily: 'Itim',
-                        ),
+                        labelStyle: descriptionStyle
                       ),
                       controller: actdetail,
                     ),
@@ -140,12 +133,7 @@ class _AddActivitiesState extends State<AddActivities> {
                             EdgeInsets.symmetric(horizontal: 50, vertical: 10),
                         child: Text(
                           "โพสต์",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontFamily: 'Itim',
-                              fontWeight: FontWeight.bold),
-                        ),
+                          style: descriptionStyle                        ),
                         onPressed: () {
                           var snapshot = _storage
                               .ref()

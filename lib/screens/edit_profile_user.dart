@@ -9,7 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:New_Project_KMUTTNEWS/screens/login_view.dart';
+//import 'package:New_Project_KMUTTNEWS/screens/login_view.dart';
 //import 'package:New_Project_KMUTTNEWS/screens/Profile.dart';
 
 class EditProfile extends StatefulWidget {
@@ -60,7 +60,7 @@ class EditProfileState extends State<EditProfile> {
   ];
 
   Widget build(BuildContext context) {
-    final FirebaseFirestore fb = FirebaseFirestore.instance;
+   // final FirebaseFirestore fb = FirebaseFirestore.instance;
 
     /////////////////////////////
     return Scaffold(

@@ -1,10 +1,10 @@
-import 'dart:developer';
+//import 'dart:developer';
 import 'dart:io';
 
 import 'package:New_Project_KMUTTNEWS/component/show_notification.dart';
 import 'package:New_Project_KMUTTNEWS/constants.dart';
 
-import 'package:New_Project_KMUTTNEWS/service/add_news_service.dart';
+//import 'package:New_Project_KMUTTNEWS/service/add_news_service.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -70,9 +70,10 @@ class _AddNewsState extends State<AddNews> {
         title: Text(
           'ข่าวสารวันนี้',
           style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontFamily: 'Itim',
+              fontSize: 24,
+              fontFamily: 'Prompt',
+              color: Colors.white,
+              fontStyle: FontStyle.italic
           ),
         ),
         backgroundColor: Colors.orange[700],
@@ -120,27 +121,19 @@ class _AddNewsState extends State<AddNews> {
                 child: Column(
                   children: <Widget>[
                     TextFormField(
-                      style: TextStyle(fontSize: 10, fontFamily: 'Itim'),
+                      style: descriptionStyle,
                       decoration: InputDecoration(
                         labelText: "หัวข้อข่าว",
-                        labelStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontFamily: 'Itim',
-                        ),
+                        labelStyle: descriptionStyle
                       ),
                       controller: newstitle,
                     ),
                     Padding(padding: const EdgeInsets.all(10)),
                     TextFormField(
-                      style: TextStyle(fontSize: 10, fontFamily: 'Itim'),
+                      style: descriptionStyle,
                       decoration: InputDecoration(
                         labelText: "รายละเอียด",
-                        labelStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontFamily: 'Itim',
-                        ),
+                        labelStyle:descriptionStyle
                       ),
                       controller: newsdetail,
                     ),
@@ -153,13 +146,10 @@ class _AddNewsState extends State<AddNews> {
                           EdgeInsets.symmetric(horizontal: 50, vertical: 10),
                       child: Text(
                         "โพสต์",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontFamily: 'Itim',
-                            fontWeight: FontWeight.bold),
+                        style: descriptionStyle
                       ),
                       onPressed: () {
+                        print("กดแล้วมีอะไรออกมาไหม");
                         var snapshot = _storage
                             .ref()
                             .child('NewsPhoto/imageName')
