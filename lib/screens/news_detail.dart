@@ -16,6 +16,8 @@ class NewsDetail extends StatefulWidget {
 }
 
 class _NewsDetailState extends State<NewsDetail> {
+ // final _saved = Set<WordPair>();
+
   @override
   Widget build(BuildContext context) {
     final NewsDetailParams params =
@@ -44,8 +46,11 @@ class _NewsDetailState extends State<NewsDetail> {
                     },
                   ),
                   CircleButton(
+
                     icon: Icons.favorite_border,
+
                     onTap: () async {
+
                       if (FirebaseAuth.instance.currentUser != null) {
                         print("มีอะไรออกมาไหม ?");
                         print(params.id);

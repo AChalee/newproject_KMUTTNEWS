@@ -150,11 +150,12 @@ class _AddNewsState extends State<AddNews> {
                       ),
                       onPressed: () {
                         print("กดแล้วมีอะไรออกมาไหม");
-                        var snapshot = _storage
-                            .ref()
-                            .child('NewsPhoto/imageName')
-                            .putFile(file)
-                            .onComplete;
+
+                        // var snapshot = _storage
+                        //     .ref()
+                        //     .child('NewsPhoto/imageName')
+                        //     .putFile(file)
+                        //     .onComplete;
                         if (newstitle.text == "" || newsdetail.text == '') {
                           showMessageBox(
                               context, "error", "กรุณากรอกรายละเอียดก่อนโพสต์",

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:New_Project_KMUTTNEWS/component/show_notification.dart';
 import 'package:New_Project_KMUTTNEWS/service/logger_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,10 +13,14 @@ Future<void> addNewsItem(
   Map<String, dynamic> data,
 ) {
   return Firestore.instance.collection("News").add(data).then((returnData) {
+    print("เพิ่มข้อมูลลง Database แล้วนะ");
     showMessageBox(context, "Success", "Added Data to Firebase",
         actions: [dismissButton(context)]);
     logger.i("setData Success");
+
   }).catchError((e) {
     logger.e(e);
+
   });
+
 }

@@ -12,6 +12,7 @@ class BookmarkNewsTab extends StatefulWidget {
 }
 
 class _BookmarkNewsTabState extends State<BookmarkNewsTab> {
+
   @override
   Widget build(BuildContext context) {
    return Scaffold(
@@ -42,9 +43,9 @@ class _BookmarkNewsTabState extends State<BookmarkNewsTab> {
                itemBuilder: (context, index) {
                  final DocumentSnapshot item = snapshot.data.documents[index];
 
+
                  return InkWell(
                    onTap: () async {
-
                      await Navigator.pushNamed(
                        context,
                        NewsDetail.routeName,
@@ -57,11 +58,13 @@ class _BookmarkNewsTabState extends State<BookmarkNewsTab> {
                        // subtitle: Text(item['detail']),
                      );
                    },
+
                    child: Container(
                      width: double.infinity,
                      height: 135.0,
                      margin:
                      EdgeInsets.symmetric(horizontal: 18.0, vertical: 8.0),
+
                      child: Container(
                        width: double.infinity,
                        padding: EdgeInsets.symmetric(
@@ -112,7 +115,11 @@ class _BookmarkNewsTabState extends State<BookmarkNewsTab> {
                                ),
                              ),
                            ),
+                           IconButton(
+                               icon: Icon(Icons.delete),
+                               onPressed:(){
 
+                               }),
                          ],
                        ),
                      ),
