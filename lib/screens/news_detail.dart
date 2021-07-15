@@ -38,16 +38,29 @@ class _NewsDetailState extends State<NewsDetail> {
                   ),
                   Spacer(),
                   CircleButton(
+                    icon: Icons.favorite_border,
+                    // onTap: () async{
+                    //   await FirebaseFirestore.instance
+                    //       .collection('News')
+                    //       .doc(params.id)
+                    //       .update(
+                    //     {'fav_count': ['fav_count']+1},
+                    //   );
+                    // },
+                  ),
+                  CircleButton(
                     icon: Icons.share,
                     onTap: () {
-                      Share.share(params.picture,
+                      Share.share(
+
+                          params.picture,
                       subject: params.title
                       );
                     },
                   ),
                   CircleButton(
 
-                    icon: Icons.favorite_border,
+                    icon: Icons.bookmark_border,
 
                     onTap: () async {
 
@@ -149,5 +162,7 @@ class NewsDetailParams {
   final String title;
   final String picture;
 
+
   NewsDetailParams(this.id, this.title,this.picture);
 }
+// void share(BuildContext context,NewsDetailParams newsdetail)

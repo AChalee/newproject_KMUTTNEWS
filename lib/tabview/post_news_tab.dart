@@ -150,12 +150,6 @@ class _AddNewsState extends State<AddNews> {
                       ),
                       onPressed: () {
                         print("กดแล้วมีอะไรออกมาไหม");
-
-                        // var snapshot = _storage
-                        //     .ref()
-                        //     .child('NewsPhoto/imageName')
-                        //     .putFile(file)
-                        //     .onComplete;
                         if (newstitle.text == "" || newsdetail.text == '') {
                           showMessageBox(
                               context, "error", "กรุณากรอกรายละเอียดก่อนโพสต์",
@@ -164,6 +158,7 @@ class _AddNewsState extends State<AddNews> {
                         } else {
                           searchData(newstitle.text);
                         }
+                        Navigator.pop(context);
                       },
                     )
                   ],

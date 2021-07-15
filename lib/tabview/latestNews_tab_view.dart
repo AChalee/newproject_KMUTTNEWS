@@ -91,7 +91,7 @@ class _LatestNewsTabViewState extends State<LatestNewsTabView> {
                             //Image.network(item['picture']),
                             Container(
                               width: 90.0,
-                              height: 135.0,
+                              height: 135,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12.0),
                                 image: DecorationImage(
@@ -112,7 +112,7 @@ class _LatestNewsTabViewState extends State<LatestNewsTabView> {
                                     Text(
                                       item['title'],
                                       overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
+                                      maxLines: 1,
                                       style: kTitleCard,
                                     ),
                                     SizedBox(
@@ -124,10 +124,32 @@ class _LatestNewsTabViewState extends State<LatestNewsTabView> {
                                       maxLines: 2,
                                       style: kDetailContent,
                                     ),
+                                    Spacer(),
+                                    Row(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 5.0,
+                                          backgroundColor: kGrey1,
+                                        ),
+                                        SizedBox(
+                                          width: 10.0,
+                                        ),
+                                        Text(
+                                          item['view_count'].toString(),
+                                          style: kDetailContent,
+                                        ),
+                                        SizedBox(
+                                          width: 10.0,
+                                        ),
+                                        Text('read',
+                                        style: kDetailContent,)
+                                      ],
+                                    ),
                                   ],
                                 ),
                               ),
                             ),
+
                             IconButton(
                                 icon: Icon(Icons.more_horiz),
                                 onPressed: () {

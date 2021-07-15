@@ -107,7 +107,7 @@ class _LatestActTabViewState extends State<LatestActTabView> {
                                         Text(
                                           item['title'],
                                           overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
+                                          maxLines: 1,
                                           style: kTitleCard,
                                         ),
                                         SizedBox(
@@ -118,6 +118,27 @@ class _LatestActTabViewState extends State<LatestActTabView> {
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 2,
                                           style: kDetailContent,
+                                        ),
+                                        Spacer(),
+                                        Row(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 5.0,
+                                              backgroundColor: kGrey1,
+                                            ),
+                                            SizedBox(
+                                              width: 10.0,
+                                            ),
+                                            Text(
+                                              item['view_count'].toString(),
+                                              style: kDetailContent,
+                                            ),
+                                            SizedBox(
+                                              width: 10.0,
+                                            ),
+                                            Text('read',
+                                              style: kDetailContent,)
+                                          ],
                                         ),
                                       ],
                                     ),

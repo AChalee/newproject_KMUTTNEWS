@@ -17,7 +17,7 @@ class _TrendActivitiesHeaderState extends State<TrendActivitiesHeader> {
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection("Activities")
-          .where('view_count', isGreaterThan: 5)
+          .where('view_count', isGreaterThan: 50)
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {

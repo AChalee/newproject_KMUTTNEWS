@@ -148,6 +148,7 @@ class _AddActivitiesState extends State<AddActivities> {
                           } else {
                             searchData(acttitle.text);
                           }
+                          Navigator.pop(context);
                         })
                   ],
                 ),
