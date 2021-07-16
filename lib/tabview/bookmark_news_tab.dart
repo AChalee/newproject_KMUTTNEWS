@@ -55,7 +55,8 @@ class _BookmarkNewsTabState extends State<BookmarkNewsTab> {
                         arguments: NewsDetailParams(
                             item.id,
                             item['title'],
-                            item['picture']
+                            item['picture'],
+                            item['likes']
                         ),
                         // title: Text(item['title']),
                         // subtitle: Text(item['detail']),
@@ -120,16 +121,25 @@ class _BookmarkNewsTabState extends State<BookmarkNewsTab> {
                             ),
                             IconButton(
                                 icon: Icon(Icons.delete),
-                                // onPressed:()async{
-                                //   if (FirebaseAuth.instance.currentUser != null) {
-                                //     print("มีอะไรออกมาไหม ?");
-                                //     print(params.id);
-                                //     await FirebaseFirestore.instance
-                                //         .collection('News')
-                                //         .doc(params.id)
-                                //         .delete('bookmark':[FirebaseAuth.instance.currentUser.uid]);
-                                //   }
-                                //}
+                                onPressed:()async{
+                                  if (FirebaseAuth.instance.currentUser != null) {
+                                    print("มีอะไรออกมาไหม ?");
+
+                                    print(item['bookmark']);
+List<String> newbookmark = (item['bookmark'] as List).map(
+        (e) => e as String).toList();
+print(newbookmark);
+                             newbookmark.remove(FirebaseAuth.instance.currentUser.uid);
+                                  
+                                    await FirebaseFirestore.instance
+                                        .collection('News')
+                                        .doc(item.id)
+                                        .update({
+                                      'bookmark' : newbookmark
+                                    }
+                                    );
+                                  }
+                                }
                                 ),
                           ],
                         ),

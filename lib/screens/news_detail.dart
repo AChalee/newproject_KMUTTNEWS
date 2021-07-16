@@ -38,15 +38,15 @@ class _NewsDetailState extends State<NewsDetail> {
                   ),
                   Spacer(),
                    CircleButton(
-                  //   icon: Icons.favorite_border,
-                  //   onTap: () async{
-                  //     await FirebaseFirestore.instance
-                  //         .collection('News')
-                  //         .doc(params.id)
-                  //         .update(
-                  //       {'likes': params['likes']+1},
-                  //     );
-                  //   },
+                    icon: Icons.favorite_border,
+                    onTap: () async{
+                      await FirebaseFirestore.instance
+                          .collection('News')
+                          .doc(params.id)
+                          .update(
+                        {'likes': params.likes+1},
+                      );
+                    },
                   ),
                   CircleButton(
                     icon: Icons.share,
@@ -116,6 +116,8 @@ class _NewsDetailState extends State<NewsDetail> {
                           fit: BoxFit.fill),
                     ),
                   ),
+                  SizedBox(height: 10,),
+                  Text("${params.likes.toString()} Like "), //String template
                   SizedBox(
                     height: 15.0,
                   ),
@@ -161,7 +163,8 @@ class NewsDetailParams {
   final String id; //กดมาจากหน้า latestNews
   final String title;
   final String picture;
+  final int likes;
 
 
-  NewsDetailParams(this.id, this.title,this.picture);
+  NewsDetailParams(this.id, this.title,this.picture,this.likes);
 }

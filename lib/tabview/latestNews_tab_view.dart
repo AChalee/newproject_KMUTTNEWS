@@ -67,7 +67,8 @@ class _LatestNewsTabViewState extends State<LatestNewsTabView> {
                         arguments: NewsDetailParams(
                           item.id,
                           item['title'],
-                          item['picture']
+                          item['picture'],
+                          item['likes'],
                         ),
                         // title: Text(item['title']),
                         // subtitle: Text(item['detail']),
