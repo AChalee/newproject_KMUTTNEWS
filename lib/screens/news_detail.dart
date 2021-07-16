@@ -17,6 +17,7 @@ class NewsDetail extends StatefulWidget {
 
 class _NewsDetailState extends State<NewsDetail> {
   // final _saved = Set<WordPair>();
+bool like = false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +39,21 @@ class _NewsDetailState extends State<NewsDetail> {
                   ),
                   Spacer(),
                    CircleButton(
-                    icon: Icons.favorite_border,
+                    icon: like ? Icons.favorite : Icons.favorite_border,
                     onTap: () async{
-                      await FirebaseFirestore.instance
-                          .collection('News')
-                          .doc(params.id)
-                          .update(
-                        {'likes': params.likes+1},
-                      );
+                      if (like == false) {
+                        await FirebaseFirestore.instance
+                            .collection('News')
+                            .doc(params.id)
+                            .update(
+                          {'likes': params.likes + 1},
+                        );
+                        setState(() {
+                          like = true;
+                        });
+                      }
                     },
+                     color: like ? Colors.red : Colors.white,
                   ),
                   CircleButton(
                     icon: Icons.share,

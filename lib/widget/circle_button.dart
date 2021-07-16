@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 class CircleButton extends StatelessWidget {
   final IconData icon;
   final Function onTap;
-  CircleButton({this.icon, this.onTap});
+  final Color color;
+  CircleButton({this.icon, this.onTap,this.color = Colors.white});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,11 @@ class CircleButton extends StatelessWidget {
         width: 50.0,
         height: 50.0,
         decoration: BoxDecoration(
+          color: color,
           shape: BoxShape.circle,
         ),
         child: Card(
+          color: color,
           elevation: 1.0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25.0),

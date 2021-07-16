@@ -62,6 +62,8 @@ class _AddNewsState extends State<AddNews> {
         "view_count": 0,
         "user_id": FirebaseAuth.instance.currentUser.uid,
         "searchKeywords": indexList,
+        "likes" : 0,
+        "bookmark" : [],
       });
     }
 
@@ -184,7 +186,7 @@ class _AddNewsState extends State<AddNews> {
 
       var snapshot = await _storage
           .ref()
-          .child('NewsPhoto/imageName')
+          .child('NewsPhoto/${DateTime.now()}')
           .putFile(file)
           .onComplete;
 
