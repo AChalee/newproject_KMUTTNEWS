@@ -16,12 +16,12 @@ class NewsDetail extends StatefulWidget {
 }
 
 class _NewsDetailState extends State<NewsDetail> {
- // final _saved = Set<WordPair>();
+  // final _saved = Set<WordPair>();
 
   @override
   Widget build(BuildContext context) {
     final NewsDetailParams params =
-        ModalRoute.of(context).settings.arguments as NewsDetailParams;
+    ModalRoute.of(context).settings.arguments as NewsDetailParams;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -37,16 +37,16 @@ class _NewsDetailState extends State<NewsDetail> {
                     onTap: () => Navigator.pop(context),
                   ),
                   Spacer(),
-                  CircleButton(
-                    icon: Icons.favorite_border,
-                    // onTap: () async{
-                    //   await FirebaseFirestore.instance
-                    //       .collection('News')
-                    //       .doc(params.id)
-                    //       .update(
-                    //     {'fav_count': ['fav_count']+1},
-                    //   );
-                    // },
+                   CircleButton(
+                  //   icon: Icons.favorite_border,
+                  //   onTap: () async{
+                  //     await FirebaseFirestore.instance
+                  //         .collection('News')
+                  //         .doc(params.id)
+                  //         .update(
+                  //       {'likes': params['likes']+1},
+                  //     );
+                  //   },
                   ),
                   CircleButton(
                     icon: Icons.share,
@@ -54,7 +54,7 @@ class _NewsDetailState extends State<NewsDetail> {
                       Share.share(
 
                           params.picture,
-                      subject: params.title
+                          subject: params.title
                       );
                     },
                   ),
@@ -165,4 +165,3 @@ class NewsDetailParams {
 
   NewsDetailParams(this.id, this.title,this.picture);
 }
-// void share(BuildContext context,NewsDetailParams newsdetail)

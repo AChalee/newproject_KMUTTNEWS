@@ -44,7 +44,7 @@ class _ActivitiesDatailState extends State<ActivitiesDatail> {
                     },
                   ),
                   CircleButton(
-                    icon: Icons.favorite_border,
+                    icon: Icons.bookmark_border,
                     onTap: () async{
                       if (FirebaseAuth.instance.currentUser != null) {
                         print("กด Save หน้า Activity ?");
