@@ -49,6 +49,8 @@ class _AddActivitiesState extends State<AddActivities> {
         "view_count": 0,
         "user_id": FirebaseAuth.instance.currentUser.uid,
         "searchKeywords": indexList,
+        "likes" : 0,
+        "bookmark" : [],
       });
     }
 

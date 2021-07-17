@@ -1,3 +1,4 @@
+import 'package:New_Project_KMUTTNEWS/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -17,11 +18,7 @@ class RegisterTabView extends StatelessWidget {
 
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance; //firebase
 
-  // Profile profile = Profile();
-  // final Future<FirebaseApp> firebase = Firebase.initializeApp();
 
-  // var selectedYear;
-  // List<String> year = <String>['ปี 1', 'ปี 2', 'ปี 3', 'ปี 4'];
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +56,7 @@ class RegisterTabView extends StatelessWidget {
 
   Widget nameText() {
     return TextFormField(
-      style: TextStyle(fontSize: 12, fontFamily: 'Itim'),
+      style: descriptionStyle,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey[200], width: 2),
@@ -92,7 +89,7 @@ class RegisterTabView extends StatelessWidget {
   Widget emailText() {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
-      style: TextStyle(fontSize: 12, fontFamily: 'Itim'),
+      style: descriptionStyle,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey[200], width: 2),
@@ -132,7 +129,7 @@ class RegisterTabView extends StatelessWidget {
   Widget passwordText() {
     return TextFormField(
       obscureText: true, //ปิดบัง password
-      style: TextStyle(fontSize: 12, fontFamily: 'Itim'),
+      style: descriptionStyle,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey[200], width: 2),
@@ -203,12 +200,9 @@ class RegisterTabView extends StatelessWidget {
     return FlatButton(
       child: Text(
         "Clear",
-        style: TextStyle(
-          color: Colors.grey,
-          fontSize: 11,
-          fontFamily: 'Itim',
+        style: kActiveTabStyle,
         ),
-      ),
+
       onPressed: () {
         formKey.currentState.reset();
       },
@@ -222,11 +216,7 @@ class RegisterTabView extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 60, vertical: 10),
       child: Text(
         "Create new account",
-        style: TextStyle(
-            color: Colors.white,
-            fontSize: 11,
-            fontFamily: 'Itim',
-            fontWeight: FontWeight.bold),
+        style: kTitleCard
       ),
       onPressed: () {
         if (formKey.currentState.validate()) {

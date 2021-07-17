@@ -119,6 +119,7 @@ class _EditActivitiesState extends State<EditActivities> {
                             'detail': actDetailController.text
                           },
                         );
+                        Navigator.pop(context);
                       },
                       child: Text('บันทึก'),
                       color: kGrey3,

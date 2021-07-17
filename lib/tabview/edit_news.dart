@@ -119,7 +119,9 @@ class _EditNewsState extends State<EditNews> {
                             'detail': detailController.text
                           },
                         );
+                        Navigator.pop(context);
                       },
+
                       child: Text('บันทึก'),
                       color: kGrey3,
                     ),
