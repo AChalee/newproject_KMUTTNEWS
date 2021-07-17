@@ -178,7 +178,7 @@ class _AddActivitiesState extends State<AddActivities> {
       //Upload to Firebase
       var snapshot = await _storage
           .ref()
-          .child('ActPhoto/imageName')
+          .child('ActPhoto/${DateTime.now()}')
           .putFile(file)
           .onComplete;
 

@@ -54,7 +54,8 @@ class _TrendActivitiesHeaderState extends State<TrendActivitiesHeader> {
                         arguments: ActivitiesDatailParams(
                           item.id,
                           item['title'],
-                            item['picture']
+                            item['picture'],
+                            item['likes']
                         ),
                       );
                     },

@@ -21,14 +21,14 @@ class CircleButton extends StatelessWidget {
           shape: BoxShape.circle,
         ),
         child: Card(
-          color: color,
+          //color: color,
           elevation: 1.0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25.0),
           ),
           child: Icon(
             icon,
-            color: kGrey2,
+            color: kGrey1,
             size: 15.0,
           ),
         ),

@@ -50,7 +50,8 @@ class _BookmarkActTabState extends State<BookmarkActTab> {
                         arguments: ActivitiesDatailParams(
                             item.id,
                             item['title'],
-                            item['picture']
+                            item['picture'],
+                          item['likes']
                         ),
                         // title: Text(item['title']),
                         // subtitle: Text(item['detail']),

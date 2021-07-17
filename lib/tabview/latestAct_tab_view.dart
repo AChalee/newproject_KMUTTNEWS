@@ -61,7 +61,8 @@ class _LatestActTabViewState extends State<LatestActTabView> {
                             arguments: ActivitiesDatailParams(
                               item.id,
                               item['title'],
-                                item['picture']
+                                item['picture'],
+                                item['likes']
                             ),
                           );
                         },
@@ -122,22 +123,19 @@ class _LatestActTabViewState extends State<LatestActTabView> {
                                         Spacer(),
                                         Row(
                                           children: [
-                                            CircleAvatar(
-                                              radius: 5.0,
-                                              backgroundColor: kGrey1,
+                                            Icon(
+                                              Icons.remove_red_eye,
+                                              size: 15,
                                             ),
                                             SizedBox(
                                               width: 10.0,
                                             ),
                                             Text(
-                                              item['view_count'].toString(),
+                                              "${item['view_count'].toString()} Read",
                                               style: kDetailContent,
+
                                             ),
-                                            SizedBox(
-                                              width: 10.0,
-                                            ),
-                                            Text('read',
-                                              style: kDetailContent,)
+
                                           ],
                                         ),
                                       ],

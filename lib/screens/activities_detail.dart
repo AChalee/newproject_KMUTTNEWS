@@ -15,6 +15,9 @@ class ActivitiesDatail extends StatefulWidget {
 }
 
 class _ActivitiesDatailState extends State<ActivitiesDatail> {
+  bool like = false;
+  bool _saved = false;
+
   @override
   Widget build(BuildContext context) {
     final ActivitiesDatailParams params =
@@ -35,6 +38,23 @@ class _ActivitiesDatailState extends State<ActivitiesDatail> {
                   ),
                   Spacer(),
                   CircleButton(
+                    icon: like ? Icons.favorite : Icons.favorite_border,
+                    onTap: () async{
+                      if (like == false) {
+                        await FirebaseFirestore.instance
+                            .collection('Activities')
+                            .doc(params.id)
+                            .update(
+                          {'likes': params.likes + 1},
+                        );
+                        setState(() {
+                          like = true;
+                        });
+                      }
+                    },
+                    color: like ? Colors.red : Colors.white,
+                  ),
+                  CircleButton(
                     icon: Icons.share,
                     onTap: () {
                       Share.share(params.picture,
@@ -44,19 +64,25 @@ class _ActivitiesDatailState extends State<ActivitiesDatail> {
                     },
                   ),
                   CircleButton(
-                    icon: Icons.bookmark_border,
+                    icon: _saved ? Icons.bookmark : Icons.bookmark_border,
                     onTap: () async{
-                      if (FirebaseAuth.instance.currentUser != null) {
-                        print("กด Save หน้า Activity ?");
-                        print(params.id);
-                        await FirebaseFirestore.instance
-                            .collection('Activities')
-                            .doc(params.id)
-                            .update({
-                          'bookmark': [FirebaseAuth.instance.currentUser.uid],
-                        });
+                      if(_saved == false) {
+                        if (FirebaseAuth.instance.currentUser != null) {
+                          print("กด Save หน้า Activity ?");
+                          print(params.id);
+                          await FirebaseFirestore.instance
+                              .collection('Activities')
+                              .doc(params.id)
+                              .update({
+                            'bookmark': [FirebaseAuth.instance.currentUser.uid],
+                          });
+                          setState(() {
+                            _saved =true;
+                          });
+                        }
                       }
                     },
+                    color: _saved ? Colors.black12 : Colors.white,
                   )
                 ],
               ),
@@ -97,6 +123,18 @@ class _ActivitiesDatailState extends State<ActivitiesDatail> {
                           image: NetworkImage(item['picture']),
                           fit: BoxFit.fill),
                     ),
+                  ),
+                  SizedBox(height: 20,),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                      ),
+                      SizedBox(width: 10,),
+                      Text("${params.likes.toString()} Like ",
+                        style: kDetailContent,), //String template
+                    ],
                   ),
                   SizedBox(
                     height: 15.0,
@@ -143,6 +181,7 @@ class ActivitiesDatailParams {
   final String id;
   final String title;
   final String picture;
+  final int likes;
 
-  ActivitiesDatailParams(this.id, this.title,this.picture);
+  ActivitiesDatailParams(this.id, this.title,this.picture,this.likes);
 }

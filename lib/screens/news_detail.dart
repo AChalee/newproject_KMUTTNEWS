@@ -123,8 +123,20 @@ bool like = false;
                           fit: BoxFit.fill),
                     ),
                   ),
-                  SizedBox(height: 10,),
-                  Text("${params.likes.toString()} Like "), //String template
+                  SizedBox(height: 20,),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                      ),
+                      SizedBox(width: 10,),
+                      Text("${params.likes.toString()} Like ",
+                        style: kDetailContent,), //String template
+                    ],
+                  ),
+
+
                   SizedBox(
                     height: 15.0,
                   ),
