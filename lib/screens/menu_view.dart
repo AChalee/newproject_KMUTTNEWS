@@ -114,12 +114,34 @@ class _AddMoreState extends State<AddMore> {
                 margin: EdgeInsets.all(8.0),
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Profile(),
-                      ),
-                    );
+                    final auth = FirebaseAuth.instance;
+                    if (auth.currentUser != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Profile(),
+                        ),
+                      );
+                    }else{
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context){
+                          return AlertDialog(
+                            content: Text('กรุณาเข้าสู่ระบบ'),
+                            actions: [
+                              FlatButton(
+                                  onPressed: (){
+                                    Navigator.push(context,
+                                      MaterialPageRoute(
+                                          builder: (context)=>Login()
+                                      ),
+                                    );
+                                  }, child: Text('Login'))
+                            ],
+                          );
+                        },
+                      );
+                    }
                   },
                   splashColor: Colors.orange[500],
                   child: Center(
