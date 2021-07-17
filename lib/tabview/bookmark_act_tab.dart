@@ -112,6 +112,30 @@ class _BookmarkActTabState extends State<BookmarkActTab> {
                                 ),
                               ),
                             ),
+                            IconButton(
+                                icon: Icon(Icons.delete),
+                                onPressed: ()async{
+                  if(FirebaseAuth.instance.currentUser != null){
+                  print("ปุ่ม delete bookmark Activity");
+                  print(item['bookmark']);
+                  List<String> newbookmark = (item['bookmark'] as List).map(
+                  (e) => e as String).toList();
+                  print(newbookmark);
+                  newbookmark
+                      .remove(FirebaseAuth.instance.currentUser.uid);
+                  await FirebaseFirestore.instance
+                      .collection("Activities")
+                      .doc(item.id)
+                      .update({
+                  'bookmark' : newbookmark
+                  }
+                  );
+                  }
+                  }
+
+
+                                ),
+
 
                           ],
                         ),

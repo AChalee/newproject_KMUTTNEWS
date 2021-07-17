@@ -18,6 +18,7 @@ class NewsDetail extends StatefulWidget {
 class _NewsDetailState extends State<NewsDetail> {
   // final _saved = Set<WordPair>();
 bool like = false;
+bool _saved = false;
 
   @override
   Widget build(BuildContext context) {
@@ -67,21 +68,26 @@ bool like = false;
                   ),
                   CircleButton(
 
-                    icon: Icons.bookmark_border,
+                    icon: _saved ? Icons.bookmark : Icons.bookmark_border,
 
                     onTap: () async {
-
-                      if (FirebaseAuth.instance.currentUser != null) {
-                        print("มีอะไรออกมาไหม ?");
-                        print(params.id);
-                        await FirebaseFirestore.instance
-                            .collection('News')
-                            .doc(params.id)
-                            .update({
-                          'bookmark': [FirebaseAuth.instance.currentUser.uid],
-                        });
-                      }
+if(_saved == false) {
+  if (FirebaseAuth.instance.currentUser != null) {
+    print("มีอะไรออกมาไหม ?");
+    print(params.id);
+    await FirebaseFirestore.instance
+        .collection('News')
+        .doc(params.id)
+        .update({
+      'bookmark': [FirebaseAuth.instance.currentUser.uid],
+    });
+    setState(() {
+      _saved = true;
+    });
+  }
+}
                     },
+                    color: _saved ? Colors.black12 : Colors.white,
                   ),
                 ],
               ),
