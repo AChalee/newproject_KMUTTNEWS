@@ -1,3 +1,5 @@
+import 'package:New_Project_KMUTTNEWS/launcher.dart';
+import 'package:New_Project_KMUTTNEWS/models/news.dart';
 import 'package:New_Project_KMUTTNEWS/screens/bookmark_view.dart';
 import 'package:New_Project_KMUTTNEWS/screens/profile_user.dart';
 
@@ -59,7 +61,7 @@ class _AddMoreState extends State<AddMore> {
                 auth.signOut().then((value) {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) {
-                    return Login();
+                    return Launcher();
                   }));
                 });
               },
@@ -142,12 +144,34 @@ class _AddMoreState extends State<AddMore> {
                 margin: EdgeInsets.all(8.0),
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BookmarkView(),
-                      ),
-                    );
+                    final auth = FirebaseAuth.instance;
+                    if (auth.currentUser != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BookmarkView(),
+                        ),
+                      );
+                    }else{
+                      showDialog(
+                          context: context,
+                      builder: (BuildContext context){
+                            return AlertDialog(
+                              content: Text('กรุณาเข้าสู่ระบบ'),
+                              actions: [
+                                FlatButton(
+                                    onPressed: (){
+                                      Navigator.push(context,
+                                         MaterialPageRoute(
+                                             builder: (context)=>Login()
+                                         ),
+                                      );
+                                    }, child: Text('Login'))
+                              ],
+                            );
+                      },
+                      );
+                    }
                   },
                   splashColor: Colors.orange[500],
                   child: Center(
@@ -162,7 +186,7 @@ class _AddMoreState extends State<AddMore> {
                         SizedBox(
                           height: 16,
                         ),
-                        Text("Save", style: descriptionStyle)
+                        Text("Bookmark", style: descriptionStyle)
                       ],
                     ),
                   ),
